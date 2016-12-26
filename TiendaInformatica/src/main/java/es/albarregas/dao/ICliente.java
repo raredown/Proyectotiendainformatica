@@ -5,15 +5,17 @@
  */
 package es.albarregas.dao;
 
-import es.albarregas.beans.Usuario;
+
+import es.albarregas.beans.Cliente;
 import java.util.ArrayList;
 
 /**
  *
  * @author rafa
  */
-public interface IUsuario {
-    public ArrayList<Usuario> getUsuario(String clausulaWhere);
-    public void addUsuario (Usuario usuario);
+public interface ICliente {
+    public ArrayList<Cliente> getCliente(String clausulaWhere);
+    public void addCliente (Cliente cliente);
     public void closeConnection();
+    
 }

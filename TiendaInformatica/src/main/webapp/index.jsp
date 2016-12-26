@@ -14,8 +14,8 @@
 
     </head>
     <body class="container-fluid">
+        
         <jsp:include page="jsp/includes/navegador.jsp" />
-         <h1>Hello World!</h1>
-
+       
     </body>
 </html>

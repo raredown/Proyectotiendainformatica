@@ -1,5 +1,6 @@
 package es.albarregas.daofactory;
 
+import es.albarregas.dao.ICliente;
 import es.albarregas.dao.IUsuario;
 
 
@@ -9,6 +10,7 @@ public abstract class DAOFactory {
 
     
     public abstract IUsuario getUsuarioDao();
+    public abstract ICliente getClienteDao();
     
     
     public static DAOFactory getDAOFactory(int tipo){

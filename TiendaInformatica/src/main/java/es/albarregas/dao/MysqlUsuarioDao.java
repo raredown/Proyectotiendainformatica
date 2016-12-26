@@ -6,10 +6,14 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Usuario;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -24,7 +28,7 @@ public class MysqlUsuarioDao implements IUsuario {
             clausulaWhere = "";
         }
         String consulta = "SELECT * FROM usuarios " + clausulaWhere;
-         try {
+        try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
                 while (resultado.next()) {
@@ -35,7 +39,7 @@ public class MysqlUsuarioDao implements IUsuario {
                     usuario.setUltimoAcesso(resultado.getDate("UltimoAcceso"));
                     usuario.setTipo(resultado.getString("Tipo"));
                     usuario.setBloqueado(resultado.getString("Bloqueado"));
-                  
+
                     lista.add(usuario);
                 }
             }
@@ -52,6 +56,22 @@ public class MysqlUsuarioDao implements IUsuario {
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void addUsuario(Usuario usuario) {
+        String sql = "INSERT INTO `empresaweb`.`usuarios` (`UserName`, `Clave`) VALUES (?,?);";
+        try {
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setString(1, usuario.getUsername());
+            preparada.setString(2, usuario.getClave());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(MysqlUsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
     }
 
 }

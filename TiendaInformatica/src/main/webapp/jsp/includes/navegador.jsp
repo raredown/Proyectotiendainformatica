@@ -3,7 +3,8 @@
     Created on : 22-dic-2016, 20:15:39
     Author     : rafa
 --%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -29,8 +30,13 @@
                 <li><a href="#">Page 3</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/jsp/Accesos/login.jsp"><span class="glyphicon glyphicon-user"></span> Registro</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Entra</a></li>
+                <c:if test="${empty sessionScope.usuario}">
+                    <li><a href="${pageContext.request.contextPath}/jsp/Accesos/login.jsp"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                    </c:if>
+                    <c:if test="${not empty sessionScope.usuario}">
+                    <li><a href="ConCliente"><span class="glyphicon glyphicon-user"></span> <c:out value="${sessionScope.usuario.username}"/></a></li>
+                    <li><a href="Login"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
+                    </c:if>
             </ul>
         </div>
     </div>
