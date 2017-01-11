@@ -9,10 +9,10 @@ function realizaProceso(sitio) {
     // alert(valorCaja1);
    
     $.ajax({
-        url: sitio,
+        url: "Prueba",
         type: 'post',
         beforeSend: function () {
-            $("#datitos").html("Procesando, espere por favor...");
+            $("#datitos").html("");
         },
         success: function (response) {
             $("#datitos").html(response);

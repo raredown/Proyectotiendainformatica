@@ -46,27 +46,25 @@ public class ConCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        if (sesion.getAttribute("cliente")==null) {
-            
-        
-        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-        DAOFactory daof = DAOFactory.getDAOFactory(1);
-        ICliente cdao = daof.getClienteDao();
-        ArrayList<Cliente> clientes = new ArrayList();
-        String where = "where IdCliente = '" + usuario.getIdUsuario() + "'";
-        clientes = cdao.getCliente(where);
-        //Si clientes esta vacio es que no tiene nigun cliente asociado a un usuario
-        if (clientes.isEmpty()) {
-            request.getRequestDispatcher("jsp/Accesos/formCliente.jsp").forward(request, response);
-        }else{
-        for (Cliente elemento : clientes) {
-                        sesion.setAttribute("cliente", elemento);
-                    }
-        }
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-        else{
-            request.getRequestDispatcher("mal.jsp").forward(request, response);
+        if (sesion.getAttribute("cliente") == null) {
+
+            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+            DAOFactory daof = DAOFactory.getDAOFactory(1);
+            ICliente cdao = daof.getClienteDao();
+            ArrayList<Cliente> clientes = new ArrayList();
+            String where = "where IdCliente = '" + usuario.getIdUsuario() + "'";
+            clientes = cdao.getCliente(where);
+            //Si clientes esta vacio es que no tiene nigun cliente asociado a un usuario
+            if (clientes.isEmpty()) {
+                request.getRequestDispatcher("jsp/Accesos/formCliente.jsp").forward(request, response);
+            } else {
+                for (Cliente elemento : clientes) {
+                    sesion.setAttribute("cliente", elemento);
+                }
+            }
+            request.getRequestDispatcher("jsp/Accesos/panelCliente.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("jsp/Accesos/panelCliente.jsp").forward(request, response);
         }
     }
 
@@ -97,44 +95,44 @@ public class ConCliente extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Validamos todos los cmapos de formulario
-       // if (Formularios.dni(request.getParameter("nif")) && Formularios.nombres(request.getParameter("nombre"), 24) && Formularios.nombres(request.getParameter("apellidos"), 39) && Formularios.email(request.getParameter("email"))) {
-            //Cogemos el la sesion de usuario para meter el id cliente ya que es el mismo 
-            HttpSession sesion = request.getSession();
-            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-            DAOFactory daof = DAOFactory.getDAOFactory(1);
-            ICliente iaof = daof.getClienteDao();
+        // if (Formularios.dni(request.getParameter("nif")) && Formularios.nombres(request.getParameter("nombre"), 24) && Formularios.nombres(request.getParameter("apellidos"), 39) && Formularios.email(request.getParameter("email"))) {
+        //Cogemos el la sesion de usuario para meter el id cliente ya que es el mismo 
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        DAOFactory daof = DAOFactory.getDAOFactory(1);
+        ICliente iaof = daof.getClienteDao();
 
-            Cliente cliente = new Cliente();
-            cliente.setNombre(request.getParameter("nombre"));
-            cliente.setIdCliente(usuario.getIdUsuario());
-            cliente.setApellidos(request.getParameter("apellidos"));
-            cliente.setEmail(request.getParameter("email"));
-            cliente.setNif(request.getParameter("nif"));
+        Cliente cliente = new Cliente();
+        cliente.setNombre(request.getParameter("nombre"));
+        cliente.setIdCliente(usuario.getIdUsuario());
+        cliente.setApellidos(request.getParameter("apellidos"));
+        cliente.setEmail(request.getParameter("email"));
+        cliente.setNif(request.getParameter("nif"));
 
-            // Date edad = Date.valueOf(request.getParameter("fecha"));
-            //Hago una plantilla para pasar una fecha de string a date
-            String stringFecha = request.getParameter("fecha");
-            //Uso este formato porque es como me llega los datos del input datespiker
-            DateFormat fecha = new SimpleDateFormat("MM/dd/yyyy");
-            java.util.Date convertido = null;
-            // java.sql.Date fecha2=java.sql.Date.valueOf(stringFecha);
-            try {
-                convertido = fecha.parse(stringFecha);
-                System.out.println(fecha.parse(stringFecha));
-            } catch (ParseException ex) {
-                Logger.getLogger(ConCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            cliente.setFechaNacimiento(new java.sql.Date(convertido.getTime()));
+        // Date edad = Date.valueOf(request.getParameter("fecha"));
+        //Hago una plantilla para pasar una fecha de string a date
+        String stringFecha = request.getParameter("fecha");
+        //Uso este formato porque es como me llega los datos del input datespiker
+        DateFormat fecha = new SimpleDateFormat("MM/dd/yyyy");
+        java.util.Date convertido = null;
+        // java.sql.Date fecha2=java.sql.Date.valueOf(stringFecha);
+        try {
+            convertido = fecha.parse(stringFecha);
+            System.out.println(fecha.parse(stringFecha));
+        } catch (ParseException ex) {
+            Logger.getLogger(ConCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cliente.setFechaNacimiento(new java.sql.Date(convertido.getTime()));
 
-            java.util.Date d = new java.util.Date();
-            //Dplantilla como la base de datos 
-            SimpleDateFormat plantilla = new SimpleDateFormat("dd/MM/yyyy H:mm");
-            String tiempo = plantilla.format(d);
-            java.sql.Date date2 = new java.sql.Date(d.getTime());
-            //Date alta = Date.valueOf(LocalDate.MAX);
-            cliente.setFechaAlta(date2);
-            iaof.addCliente(cliente);
-      //  }
+        java.util.Date d = new java.util.Date();
+        //Dplantilla como la base de datos 
+        SimpleDateFormat plantilla = new SimpleDateFormat("dd/MM/yyyy H:mm");
+        String tiempo = plantilla.format(d);
+        java.sql.Date date2 = new java.sql.Date(d.getTime());
+        //Date alta = Date.valueOf(LocalDate.MAX);
+        cliente.setFechaAlta(date2);
+        iaof.addCliente(cliente);
+        //  }
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
     }

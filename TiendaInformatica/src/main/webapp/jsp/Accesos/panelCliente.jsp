@@ -21,8 +21,8 @@
         <jsp:include page="../includes/navegador.jsp" />
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('../includes/panelcliente/datosusuario.jsp')">Modificación de login</button>
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('../includes/panelcliente/datoscliente.jsp')">Modificación datos personales</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('jsp/includes/panelcliente/datosusuario.jsp')">Modificación de login</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('jsp/includes/panelcliente/datoscliente.jsp')">Modificación datos personales</button>
             </div>
         </div>
         <br>

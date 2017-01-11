@@ -1,0 +1,9 @@
+diff a/TiendaInformatica/src/main/webapp/jsp/Accesos/formCliente.jsp b/TiendaInformatica/src/main/webapp/jsp/Accesos/formCliente.jsp	(rejected hunks)
+@@ -12,7 +12,6 @@
+         <title>Start Page</title>
+         <jsp:include page="../includes/head.jsp" />
+         <link href="${pageContext.request.contextPath}/css/formulario.css" rel="stylesheet">
+-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+        
+         <script>
+             $(document).ready(function () {

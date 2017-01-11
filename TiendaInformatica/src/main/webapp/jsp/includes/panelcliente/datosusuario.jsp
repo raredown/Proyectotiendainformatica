@@ -11,21 +11,20 @@
         <form class="form-horizontal" method="post" action="ConCliente">
             <fieldset>
                 <legend>Datos Usuario</legend>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Usuario</label>
+              <div class="form-group">
+                    <label for="inputContrasena" class="col-lg-2 control-label">Vieja Contraseñas</label>
                     <div class="col-lg-4">
-                        <input  class="form-control" type="text" id="Username" required="required" name="usuario" pattern="([a-z]+[0-9]{0,2}){5,12}$" required/>
-
+                        <input type="password" class="form-control" id="Password" required="required" name="pass"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputContrasena" class="col-lg-2 control-label">Contraseñas</label>
+                    <label for="inputContrasena" class="col-lg-2 control-label">Nueva Contraseñas</label>
                     <div class="col-lg-4">
                         <input type="password" class="form-control" id="Password" required="required" name="pass"/>
                     </div>
                 </div>
                   <div class="form-group">
-                    <label for="inputContrasena2" class="col-lg-2 control-label">Nueva Contraseñas</label>
+                    <label for="inputContrasena2" class="col-lg-2 control-label">Repita Contraseñas</label>
                     <div class="col-lg-4">
                         <input type="password2" class="form-control" id="Password" required="required" name="pass2"/>
                     </div>
@@ -34,7 +33,7 @@
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="reset" class="btn btn-primary">Cancelar</button>
-                    <button type="submit" class="btn btn-info">Enviar</button>
+                    <button type="submit" class="btn btn-info">Actualizar</button>
                 </div>
             </div>
         </form>

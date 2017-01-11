@@ -12,7 +12,10 @@
         <title>Start Page</title>
         <jsp:include page="../includes/head.jsp" />
         <link href="${pageContext.request.contextPath}/css/formulario.css" rel="stylesheet">
-       
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+
         <script>
             $(document).ready(function () {
                 $('#fecha').datepicker();
@@ -51,13 +54,13 @@
                                 <input type="text" class="form-control" id="nif" placeholder="Letra del dni en mayúscula" name="nif" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" required>
                             </div>
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label class="col-lg-2 control-label">Edad</label>
                             <div class="col-lg-4">
                                 <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Pincha y elige fecha">
                             </div>
                         </div>
-                       
+
                     </fieldset>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
