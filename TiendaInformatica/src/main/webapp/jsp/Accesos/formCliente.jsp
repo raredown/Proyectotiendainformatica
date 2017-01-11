@@ -12,8 +12,7 @@
         <title>Start Page</title>
         <jsp:include page="../includes/head.jsp" />
         <link href="${pageContext.request.contextPath}/css/formulario.css" rel="stylesheet">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+       
         <script>
             $(document).ready(function () {
                 $('#fecha').datepicker();

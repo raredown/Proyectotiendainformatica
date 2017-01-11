@@ -9,12 +9,31 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <jsp:include page="../includes/head.jsp" />
+        <link href="${pageContext.request.contextPath}/css/formulario.css" rel="stylesheet">
+
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-         <jsp:include page="../includes/head.jsp" />
+        <script src="${pageContext.request.contextPath}/js/panelModificacion.js"></script>
         <title>JSP Page</title>
     </head>
     <body class="container-fluid">
 
         <jsp:include page="../includes/navegador.jsp" />
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('../includes/panelcliente/datosusuario.jsp')">Modificación de login</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('../includes/panelcliente/datoscliente.jsp')">Modificación datos personales</button>
+            </div>
+        </div>
+        <br>
+          <div class="row">
+            <div id="datitos">
+                
+            </div>
+        </div>
+        <!--
+        <jsp:include page="../includes/panelcliente/datoscliente.jsp" /><br>
+        <jsp:include page="../includes/panelcliente/datosusuario.jsp" />
+        -->
     </body>
 </html>
