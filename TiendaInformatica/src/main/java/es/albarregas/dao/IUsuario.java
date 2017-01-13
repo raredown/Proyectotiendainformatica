@@ -15,5 +15,6 @@ import java.util.ArrayList;
 public interface IUsuario {
     public ArrayList<Usuario> getUsuario(String clausulaWhere);
     public void addUsuario (Usuario usuario);
+    public void updateUsuario(Usuario usuario);
     public void closeConnection();
 }

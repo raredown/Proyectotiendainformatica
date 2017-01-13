@@ -14,6 +14,7 @@
 
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <script src="${pageContext.request.contextPath}/js/panelModificacion.js"></script>
+        
         <title>JSP Page</title>
     </head>
     <body class="container-fluid">
@@ -28,7 +29,7 @@
         <br>
           <div class="row">
             <div id="datitos">
-                
+                <c:out value="${requestScope.mensaje}" />
             </div>
         </div>
         <!--

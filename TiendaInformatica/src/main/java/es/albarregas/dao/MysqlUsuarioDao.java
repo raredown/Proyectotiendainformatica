@@ -74,4 +74,19 @@ public class MysqlUsuarioDao implements IUsuario {
         }
     }
 
+    @Override
+    public void updateUsuario(Usuario usuario) {
+        try {
+            String sql ="UPDATE `empresaweb`.`usuarios` SET `Clave`=? WHERE  `IdUsuario`=?;";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setString(1,usuario.getClave());
+            preparada.setInt(2, usuario.getIdUsuario());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+    }
+
 }

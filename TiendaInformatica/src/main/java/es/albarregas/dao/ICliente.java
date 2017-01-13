@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public interface ICliente {
     public ArrayList<Cliente> getCliente(String clausulaWhere);
     public void addCliente (Cliente cliente);
+    public void updateCliente(Cliente cliente);
     public void closeConnection();
     
 }

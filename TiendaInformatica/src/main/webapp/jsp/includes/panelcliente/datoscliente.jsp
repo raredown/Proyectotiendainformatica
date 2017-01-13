@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <form class="form-horizontal" method="post" action="ConCliente">
+        <form class="form-horizontal" method="post" action="PanelCliente">
             <fieldset>
                 <legend>Datos Personales</legend>
                 <div class="form-group">
@@ -35,6 +35,7 @@
                         <input type="text" class="form-control" id="nif" placeholder="Letra del dni en mayúscula" name="nif" pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))" value="<c:out value="${sessionScope.cliente.nif}"/>" required>
                     </div>
                 </div>
+                    <input type="hidden" name="paneles" value="datosclientes">
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Edad</label>
                     <div class="col-lg-4">
@@ -46,7 +47,7 @@
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="reset" class="btn btn-primary">Cancelar</button>
-                    <button type="submit" class="btn btn-info">Enviar</button>
+                    <button type="submit" class="btn btn-info">Actualizar</button>
                 </div>
             </div>
         </form>

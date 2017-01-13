@@ -65,10 +65,10 @@ public class MysqlClienteDao implements ICliente {
             preparada.setDate(6, cliente.getFechaNacimiento());
             preparada.setDate(7, cliente.getFechaAlta());
             preparada.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(MysqlClienteDao.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             this.closeConnection();
         }
     }
@@ -76,6 +76,27 @@ public class MysqlClienteDao implements ICliente {
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void updateCliente(Cliente cliente) {
+        String sql = "update equipos set marca=?,numSerie=? where idEquipo=?";
+        sql="UPDATE `empresaweb`.`clientes` SET `Nombre`=?, `Apellidos`=?, `Email`=?, `NIF`=?, `FechaNacimiento`=? WHERE  `IdCliente`=?;";
+        try {
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            
+            preparada.setString(1, cliente.getNombre());
+            preparada.setString(2, cliente.getApellidos());
+            preparada.setString(3, cliente.getEmail());
+            preparada.setString(4, cliente.getNif());
+            preparada.setDate(5, cliente.getFechaNacimiento());
+            preparada.setInt(6, cliente.getIdCliente());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlClienteDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
     }
 
 }
