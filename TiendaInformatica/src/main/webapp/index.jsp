@@ -33,9 +33,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-10">
+            <div class="col-xs-10" id="recarga">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
+                    <input type="hidden" value="1" id="pagina">
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
 

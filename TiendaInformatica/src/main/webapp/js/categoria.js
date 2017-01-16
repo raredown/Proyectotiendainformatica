@@ -4,7 +4,20 @@
  * and open the template in the editor.
  */
 function redireccionar(idcategoria) {
+    var pagina = $("#pagina").val();
+    var url = "Categoria?idcateindex=" + idcategoria+"&paginacion="+pagina;
     
-    var url = "Categoria?idcateindex="+idcategoria;
-    $(location).attr('href', url);
+
+    $.ajax({
+        url: url,
+        type: 'get',
+        beforeSend: function () {
+            $("#recarga").html("Procesando, espere por favor...");
+        },
+        success: function (response) {
+            $("#recarga").html(response);
+        }
+    });
+
+
 } 

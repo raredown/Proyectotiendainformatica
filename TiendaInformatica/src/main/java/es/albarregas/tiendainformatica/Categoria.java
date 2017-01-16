@@ -5,8 +5,12 @@
  */
 package es.albarregas.tiendainformatica;
 
+import es.albarregas.beans.Producto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,11 +35,30 @@ public class Categoria extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("idcateindex")!= null) {
-            String idcatein =request.getParameter("idcateindex");
+        if (request.getParameter("idcateindex") != null) {
+            String idcatein = request.getParameter("idcateindex");
+            int idcateiint = Integer.parseInt(idcatein);
+            int limit = 5;
             //Categoria que viene dada por el index
+            ServletContext ctx = getServletContext();
+            ArrayList<Producto> productos = (ArrayList<Producto>) ctx.getAttribute("productos");
+            Iterator<Producto> it = productos.iterator();
+           
+            ArrayList<Producto> productosCat = new ArrayList();
+            while (it.hasNext()) {
+                Producto productito = it.next();
+                // productosImagenes.add(it.next().setListaImagenes(daoimagen.getImagen("where imagenes.IdProducto = ")));
+                if (idcateiint==productito.getIdCategoria()) {
+                    limit = limit -1;
+                    productosCat.add(productito);
+                    if (limit==0) {
+                        break;
+                    }
+                }
+            }
+            request.setAttribute("productosCat", productosCat);
             request.setAttribute("idcatein", idcatein);
-            request.getRequestDispatcher("jsp/productos/prueba.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/productos/porcategoria2.jsp").forward(request, response);
         }
     }
 
