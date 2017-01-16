@@ -5,6 +5,7 @@
  */
 package es.albarregas.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,6 +15,10 @@ import java.util.Date;
 public class Producto {
 
     private int idProducto;
+    
+    private int idCategoria;
+    private int idMarca;
+    private int idProvedor;
     private String denominacion;
     private String descripcion;
     private float precioUnitario;
@@ -23,6 +28,68 @@ public class Producto {
     private String oferta;
     private String fueraCatalogo;
     private int rating;
+    private Categoria categoria;
+    private Provedor provedor;
+    private Marca marca;
+    private ArrayList<Imagen> listaImagenes;
+
+    public ArrayList<Imagen> getListaImagenes() {
+        return listaImagenes;
+    }
+
+    public void setListaImagenes(ArrayList<Imagen> listaImagenes) {
+        this.listaImagenes = listaImagenes;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Provedor getProvedor() {
+        return provedor;
+    }
+
+    public void setProvedor(Provedor provedor) {
+        this.provedor = provedor;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public int getIdMarca() {
+        return idMarca;
+    }
+
+    public void setIdMarca(int idMarca) {
+        this.idMarca = idMarca;
+    }
+
+    public int getIdProvedor() {
+        return idProvedor;
+    }
+
+    public void setIdProvedor(int idProvedor) {
+        this.idProvedor = idProvedor;
+    }
+
+   
 
     public int getIdProducto() {
         return idProducto;
