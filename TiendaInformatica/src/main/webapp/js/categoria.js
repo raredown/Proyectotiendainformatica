@@ -21,3 +21,19 @@ function redireccionar(idcategoria) {
 
 
 } 
+function ordenar(ordenacion) {
+    var idcategoria = $("#categoria").val();
+   //alert(idcategoria);
+    var url = "Categoria?idcateindex=" + idcategoria+"&ordenacion="+ordenacion;
+      $.ajax({
+        url: url,
+        type: 'get',
+        beforeSend: function () {
+            $("#recarga").html("Procesando, espere por favor...");
+        },
+        success: function (response) {
+            $("#recarga").html(response);
+        }
+    });
+
+} 

@@ -6,9 +6,12 @@
 package es.albarregas.tiendainformatica;
 
 import es.albarregas.beans.Producto;
+import es.albarregas.modelos.ProductoOrdenados;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,22 +46,65 @@ public class Categoria extends HttpServlet {
             ServletContext ctx = getServletContext();
             ArrayList<Producto> productos = (ArrayList<Producto>) ctx.getAttribute("productos");
             Iterator<Producto> it = productos.iterator();
-           
+
             ArrayList<Producto> productosCat = new ArrayList();
+
             while (it.hasNext()) {
                 Producto productito = it.next();
                 // productosImagenes.add(it.next().setListaImagenes(daoimagen.getImagen("where imagenes.IdProducto = ")));
-                if (idcateiint==productito.getIdCategoria()) {
-                    limit = limit -1;
+                if (idcateiint == productito.getIdCategoria()) {
+
                     productosCat.add(productito);
-                    if (limit==0) {
-                        break;
-                    }
+
                 }
             }
+            // ProductoOrdenados ordenados = new ProductoOrdenados();
+            //java.util.Collections.sort(productosCat, Comparable);
+            /*Por id marca
+            Collections.sort(productosCat,new Comparator<Producto>(){
+                     public int compare(Producto s1,Producto s2){
+                           // Write your logic here.
+                           return Integer.compare(s1.getIdMarca(), s2.getIdMarca());
+                     }});
+             */
+            if (request.getParameter("ordenacion") != null) {
+                String ordenacion = request.getParameter("ordenacion");
+                switch (ordenacion) {
+
+                    case "precio":
+                        Collections.sort(productosCat, new Comparator<Producto>() {
+                            public int compare(Producto s1, Producto s2) {
+                                // Write your logic here.
+                                return Integer.compare(Math.round(s1.getPrecioUnitario()), Math.round(s2.getPrecioUnitario()));
+                            }
+                        });
+                        break;
+
+                    case "marca":
+                        Collections.sort(productosCat, new Comparator<Producto>() {
+                            public int compare(Producto s1, Producto s2) {
+                                // Write your logic here.
+                                return Integer.compare(s1.getIdMarca(), s2.getIdMarca());
+                            }
+                        });
+                        break;
+                    case "nombre":
+
+                        break;
+                }
+
+            }
+
+            int tamano = productosCat.size();
+            int numeroPagina = tamano / 5;
+            if (tamano % 5 != 0) {
+                numeroPagina = numeroPagina + 1;
+            }
+
+            request.setAttribute("numeroPagina", numeroPagina);
             request.setAttribute("productosCat", productosCat);
             request.setAttribute("idcatein", idcatein);
-            request.getRequestDispatcher("jsp/productos/porcategoria2.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/productos/porcategoria3.jsp").forward(request, response);
         }
     }
 
