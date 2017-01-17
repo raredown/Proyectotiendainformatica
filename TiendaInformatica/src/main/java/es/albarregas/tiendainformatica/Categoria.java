@@ -89,7 +89,12 @@ public class Categoria extends HttpServlet {
                         });
                         break;
                     case "nombre":
-
+                       Collections.sort(productosCat, new Comparator<Producto>() {
+                            public int compare(Producto s1, Producto s2) {
+                                // Write your logic here.
+                                return s1.getDenominacion().compareToIgnoreCase(s2.getDenominacion());
+                            }
+                        });
                         break;
                 }
 
@@ -104,7 +109,7 @@ public class Categoria extends HttpServlet {
             request.setAttribute("numeroPagina", numeroPagina);
             request.setAttribute("productosCat", productosCat);
             request.setAttribute("idcatein", idcatein);
-            request.getRequestDispatcher("jsp/productos/porcategoria3.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/productos/ordeCategoria.jsp").forward(request, response);
         }
     }
 
