@@ -5,19 +5,8 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<input value="<c:out value="${requestScope.idcatein}"/>" type="hidden" id="categoria">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" onclick="ordenar('nombre')" >Ordenar por nombre</button>
-                <button type="button" class="btn btn-default" onclick="ordenar('precio')">Ordenar por precio</button>
-                <button type="button" class="btn btn-default" onclick="ordenar('marca')">Ordenar por marca</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 <div class="container-fluid">		
     <div class="col-md-12 product-info">
         <ul id="myTab" class="nav nav-tabs nav_tabs">
@@ -33,7 +22,7 @@
             <div class="tab-pane fade in active" id="1a">
 
                 <section class="container product-info">
-                    <c:forEach var="item" items="${requestScope.productosCat}" end="5">
+                    <c:forEach var="item" items="${requestScope.productosBuscado}" end="5">
 
 
 
@@ -81,7 +70,7 @@
                 <div class="tab-pane fade" id="<c:out value="${i}"/>a">
 
                     <section class="container">
-                        <c:forEach var="item" items="${requestScope.productosCat}" begin="${5 * (i-1)}" end="${5 * i}">
+                        <c:forEach var="item" items="${requestScope.productosBuscado}" begin="${5 * (i-1)}" end="${5 * i}">
 
 
 

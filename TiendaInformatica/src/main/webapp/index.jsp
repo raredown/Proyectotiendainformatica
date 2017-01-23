@@ -12,6 +12,8 @@
         <title>Start Page</title>
         <jsp:include page="jsp/includes/head.jsp" />
         <script src="${pageContext.request.contextPath}/js/categoria.js"></script>
+        <script src="${pageContext.request.contextPath}/js/producto.js"></script>
+        <script src="${pageContext.request.contextPath}/js/buscadorSimple.js"></script>
 
     </head>
     <body class="container-fluid">
@@ -43,7 +45,7 @@
                             <img src="image/imagenesProductos/imagenesProductos/<c:out value="${applicationScope.productos[0].listaImagenes[0].image}"/>" alt="Chania">
                             <div class="carousel-caption">
                                 <h3><c:out value="${applicationScope.productos[0].denominacion}"/>"</h3>
-                                <p><button class="btn-primary" type="button">Ver Producto</button></p>
+                                <p><button class="btn-primary" type="button" onclick="unProducto('<c:out value="${applicationScope.productos[0].idProducto}"/>')">Ver Producto</button></p>
 
                             </div>
                         </div>
@@ -53,7 +55,7 @@
                                     <img src="image/imagenesProductos/imagenesProductos/<c:out value="${item.listaImagenes[0].image}"/>" alt="<c:out value="${item.denominacion}"/>"">
                                     <div class="carousel-caption">
                                         <h3><c:out value="${item.denominacion}"/>"</h3>
-                                        <p><button class="btn-primary" type="button">Ver Producto</button></p>
+                                        <p><button class="btn-primary" type="button" onclick="unProducto('<c:out value="${item.idProducto}"/>')">Ver Producto</button></p>
                                     </div>
                                 </div>
                             </c:if>

@@ -19,8 +19,18 @@
             <ul class="nav navbar-nav">
                 <li><a href="${pageContext.request.contextPath}">Empresa web</a></li>
                 <li><a href="#">Producto</a></li>
-              
+
             </ul>
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search" onsubmit="return busquedaSimple();" >
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="buscador" required="required" id="buscador">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty sessionScope.usuario}">
                     <li><a href="${pageContext.request.contextPath}/jsp/Accesos/login.jsp"><span class="glyphicon glyphicon-user"></span> Login</a></li>

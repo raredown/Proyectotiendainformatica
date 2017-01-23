@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Daw2
+ * @author rafa
  */
-@WebServlet(name = "Producto", urlPatterns = {"/Producto"})
-public class Producto extends HttpServlet {
+@WebServlet(name = "BuscadorSimple", urlPatterns = {"/BuscadorSimple"})
+public class BuscadorSimple extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +34,34 @@ public class Producto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("idproducto") != null) {
-            String idproduIn = request.getParameter("idproducto");
-            int idProducInt =Integer.parseInt(idproduIn);
+      
+        if (request.getParameter("buscador") != null) {
+            String cadenaBuscada = request.getParameter("buscador");
             ServletContext ctx = getServletContext();
             ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
             Iterator<es.albarregas.beans.Producto> it = productos.iterator();
 
-            ArrayList<es.albarregas.beans.Producto> productosId = new ArrayList();
+            ArrayList<es.albarregas.beans.Producto> productosBuscado = new ArrayList();
 
             while (it.hasNext()) {
                 es.albarregas.beans.Producto productito = it.next();
-                // productosImagenes.add(it.next().setListaImagenes(daoimagen.getImagen("where imagenes.IdProducto = ")));
-                if (idProducInt == productito.getIdProducto()) {
+                // productito.getDenominacion().indexOf(cadenaBuscada);
+                // Comparo si tiene el substring del buscador
+                if (productito.getDenominacion().toLowerCase().contains(cadenaBuscada.toLowerCase())) {
 
-                    productosId.add(productito);
+                    productosBuscado.add(productito);
 
                 }
             }
-            request.setAttribute("productosId", productosId);
-            request.getRequestDispatcher("jsp/productos/unProducto.jsp").forward(request, response);
+            int tamano = productosBuscado.size();
+            int numeroPagina = tamano / 5;
+            if (tamano % 5 != 0) {
+                numeroPagina = numeroPagina + 1;
+            }
+            request.setAttribute("numeroPagina", numeroPagina);
+            request.setAttribute("productosBuscado", productosBuscado);
+            request.setAttribute("cadenaBuscada", cadenaBuscada);
+            request.getRequestDispatcher("jsp/productos/buscadorsimple.jsp").forward(request, response);
         }
     }
 
