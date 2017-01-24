@@ -5,21 +5,21 @@
  */
 package es.albarregas.dao;
 
-
-import es.albarregas.beans.Cliente;
+import es.albarregas.beans.Pedido;
 import java.util.ArrayList;
 
 /**
  *
- * @author rafa
+ * @author Daw2
  */
-public interface ICliente {
-    public ArrayList<Cliente> getCliente(String clausulaWhere);
+public interface IPedido {
 
-    public void addCliente(Cliente cliente);
+    public ArrayList<Pedido> getPedido(String clausulaWhere);
 
-    public void updateCliente(Cliente cliente);
+    public void addPedido(Pedido Pedido);
+
+    public void updatePedido(Pedido Pedido);
 
     public void closeConnection();
-    
+
 }

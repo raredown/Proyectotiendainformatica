@@ -87,5 +87,8 @@
             </c:forEach>
             -->
         </div>
+
+
+        <jsp:include page="jsp/includes/footer.jsp" />
     </body>
 </html>
