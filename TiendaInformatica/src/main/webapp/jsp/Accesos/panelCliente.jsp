@@ -27,16 +27,17 @@
                     <div class="panel-body"> 
                         <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('jsp/includes/panelcliente/datosusuario.jsp')">Modificación de login</button>
                         <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('jsp/includes/panelcliente/datoscliente.jsp')">Modificación datos personales</button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="realizaProceso('ControladorProvincia')">Modificación de direcciones</button>
                     </div>
                 </div>
 
             </div>
-             <div id="datitos">
+            <div id="datitos">
                 <c:out value="${requestScope.mensaje}" />
             </div>
         </div>
         <br>
-       
+
         <!--
         <jsp:include page="../includes/panelcliente/datoscliente.jsp" /><br>
         <jsp:include page="../includes/panelcliente/datosusuario.jsp" />

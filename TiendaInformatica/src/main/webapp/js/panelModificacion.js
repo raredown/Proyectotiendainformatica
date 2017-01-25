@@ -75,3 +75,19 @@ function contrasena() {
     //alert(pasServer);
 
 }
+function cargarPueblos() {
+     alert("llego");
+     alert($("#provincias").select().val());
+     var id = $("#provincias").select().val();
+
+    $.ajax({
+        url: "ContraladorPueblo?idProvincia = "+id,
+        type: 'get',
+        beforeSend: function () {
+            $("#pueblos").html("");
+        },
+        success: function (response) {
+            $("#pueblos").html(response);
+        }
+    });
+}
