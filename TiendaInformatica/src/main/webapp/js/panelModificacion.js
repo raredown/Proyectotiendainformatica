@@ -76,18 +76,35 @@ function contrasena() {
 
 }
 function cargarPueblos() {
-     alert("llego");
-     alert($("#provincias").select().val());
+    
      var id = $("#provincias").select().val();
-
+     var sitio = "ContraladorPueblo?idProvincia="+id;
+   
     $.ajax({
-        url: "ContraladorPueblo?idProvincia = "+id,
+        url: sitio,
         type: 'get',
         beforeSend: function () {
             $("#pueblos").html("");
         },
         success: function (response) {
             $("#pueblos").html(response);
+        }
+    });
+}
+function cargarCodigoPostal() {
+  
+     var idpro = $("#provincias").select().val();
+     var id = $("#selectpueblos").select().val();
+     var sitio = "ContraladorPueblo?codigoPostal="+id+"&idpro="+idpro;
+   
+    $.ajax({
+        url: sitio,
+        type: 'get',
+        beforeSend: function () {
+            $("#codigoPostal").html("");
+        },
+        success: function (response) {
+            $("#codigoPostal").html(response);
         }
     });
 }

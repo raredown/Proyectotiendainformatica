@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public interface IPueblo {
 
     public ArrayList<Pueblo> getPueblo(String clausulaWhere);
+     public ArrayList<Pueblo> getPuebloCodigoPostal(String clausulaWhere);
 
     public void closeConnection();
 
