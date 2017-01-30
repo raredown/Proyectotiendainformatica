@@ -96,15 +96,18 @@ function cargarCodigoPostal() {
      var idpro = $("#provincias").select().val();
      var id = $("#selectpueblos").select().val();
      var sitio = "ContraladorPueblo?codigoPostal="+id+"&idpro="+idpro;
+   //alert(sitio);
    
     $.ajax({
         url: sitio,
         type: 'get',
         beforeSend: function () {
-            $("#codigoPostal").html("");
+            //alert("llego antezs");
+            $("#contenedorformdirrecion").html("");
         },
         success: function (response) {
-            $("#codigoPostal").html(response);
+            //alert("llego despues");
+            $("#contenedorformdirrecion").html(response);
         }
     });
 }

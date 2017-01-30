@@ -46,18 +46,18 @@ public class ContraladorPueblo extends HttpServlet {
             request.getRequestDispatcher("jsp/direccion/selectPoblacion.jsp").forward(request, response);
 
         } else if (request.getParameter("codigoPostal") != null) {
-           
+
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IPueblo puedao = daof.getPueblo();
             String prueba = request.getParameter("codigoPostal");
             ArrayList<Pueblo> pueblos = new ArrayList();
-            pueblos = puedao.getPuebloCodigoPostal("where Nombre ='"+request.getParameter("codigoPostal")+"' and IdProvincia= "+request.getParameter("idpro"));
+            pueblos = puedao.getPuebloCodigoPostal("where Nombre ='" + request.getParameter("codigoPostal") + "' and IdProvincia= " + request.getParameter("idpro"));
             request.setAttribute("pueblos", pueblos);
-            //request.getRequestDispatcher("mal.jsp").forward(request, response);
-            request.getRequestDispatcher("jsp/direccion/selectCodigoPostalYdatos.jsp").forward(request, response);
+     //       request.getRequestDispatcher("mal.jsp").forward(request, response);
+          request.getRequestDispatcher("jsp/direccion/selectCodigoPostalYdatos.jsp").forward(request, response);
 
         }
-        request.getRequestDispatcher("mal.jsp").forward(request, response);
+      //  request.getRequestDispatcher("mal.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

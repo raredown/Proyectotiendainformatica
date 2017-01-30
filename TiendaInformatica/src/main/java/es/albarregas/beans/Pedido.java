@@ -5,7 +5,7 @@
  */
 package es.albarregas.beans;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *

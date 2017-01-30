@@ -9,9 +9,9 @@
 
     <label class="col-lg-2 control-label">Codigo postal:</label>
     <div class="col-lg-4">
-        <select class="form-control" id="selectcodigopostal"  >
+        <select class="form-control" id="selectcodigopostal"  name="idPuebloCd">
             <c:forEach var="i" items="${requestScope.pueblos}">
-                <option value="<c:out value="${i.idPueblo}"/>"><c:out value="${i.codigoPostal}" /></option>
+                <option value="<c:out value="${i.idPueblo}"/>/<c:out value="${i.codigoPostal}" />"><c:out value="${i.codigoPostal}" /></option>
             </c:forEach>
         </select>
     </div>
@@ -19,13 +19,13 @@
 <div class="form-group">
     <label for="dirrecioncalle" class="col-lg-2 control-label">Dirreción:</label>
     <div class="col-lg-4">
-        <input type="text" class="form-control" id="dirrecionCalle" placeholder="dirrecion" name="dirrecionCalle"  required>
+        <input type="text" class="form-control" id="direccion" placeholder="dirrecion" name="direccion"  required>
     </div>
 </div>
 <div class="form-group">
     <label for="direcionNombre" class="col-lg-2 control-label">Nombre de esta Dirreción:</label>
     <div class="col-lg-4">
-        <input type="text" class="form-control" id="direcionNombre" placeholder="nombre dirrecion" name="direcionNombre"  required>
+        <input type="text" class="form-control" id="nombreDirrecion" placeholder="nombre dirrecion" name="nombreDirrecion"  required>
     </div>
 </div>
 <div class="form-group">

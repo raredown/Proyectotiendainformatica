@@ -25,7 +25,7 @@ public class MysqlPedidoDao implements IPedido {
 
     @Override
     public void addPedido(Pedido Pedido) {
-        String sql = "INSERT INTO `empresaweb`.`clientes` (`IdCliente`, `Nombre`, `Apellidos`, `Email`, `NIF`,`FechaNacimiento`,`FechaAlta`) VALUES (?, ?, ?, ?, ?,?,?)";
+        String sql = "INSERT INTO pedidos (`Fecha`, `Estado`, `BaseImponible`, `Descuento`,`GastosEnvio`,`Iva`,`IdDireccion`,`IdCliente`) VALUES (?, ?, ?, ?, ?,?,?,?)";
         try {
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
         } catch (SQLException ex) {

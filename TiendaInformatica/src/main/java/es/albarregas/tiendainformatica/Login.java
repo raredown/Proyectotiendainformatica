@@ -5,7 +5,11 @@
  */
 package es.albarregas.tiendainformatica;
 
+import es.albarregas.beans.Cliente;
+import es.albarregas.beans.Dirrecion;
 import es.albarregas.beans.Usuario;
+import es.albarregas.dao.ICliente;
+import es.albarregas.dao.IDirrecion;
 import es.albarregas.dao.IUsuario;
 import es.albarregas.daofactory.DAOFactory;
 import es.albarregas.modelos.Formularios;
@@ -64,7 +68,19 @@ public class Login extends HttpServlet {
                     //Uso un for pero solo cojo uno es imposible que haya varios usuarios despues de la clausula where de antes
                     for (Usuario elemento : usuarios) {
                         sesion.setAttribute("usuario", elemento);
+                        ICliente cdao = daof.getClienteDao();
+                        ArrayList<Cliente> clientes = new ArrayList();
+                        String whereCLie = "where IdCliente = '" + elemento.getIdUsuario() + "'";
+                        clientes = cdao.getCliente(whereCLie);
+                        for (Cliente elemento2 : clientes) {
+                            sesion.setAttribute("cliente", elemento2);
+                            IDirrecion dirredao = daof.getDirrecion();
+                            ArrayList<Dirrecion> dirreciones = new ArrayList();
+                            dirreciones = dirredao.getDirrecion("where IdCliente =" +elemento2.getIdCliente());
+                            sesion.setAttribute("dirreciones", dirreciones);
+                        }
                     }
+
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
                 //request.getRequestDispatcher("index_1.html").forward(request, response);
@@ -93,7 +109,7 @@ public class Login extends HttpServlet {
                             sesion.setAttribute("usuario", elemento);
                         }
                     }
-                   
+
                 }
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
@@ -116,7 +132,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Uso el metodo post para salir de la session
+        //Uso el metodo get para salir de la session
         HttpSession sesion = request.getSession();
         sesion.invalidate();
         request.getRequestDispatcher("index.jsp").forward(request, response);

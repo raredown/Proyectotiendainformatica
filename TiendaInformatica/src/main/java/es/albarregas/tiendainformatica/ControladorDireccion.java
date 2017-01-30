@@ -5,13 +5,23 @@
  */
 package es.albarregas.tiendainformatica;
 
+import es.albarregas.beans.Cliente;
+import es.albarregas.beans.Dirrecion;
+import es.albarregas.dao.IDirrecion;
+import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
@@ -31,19 +41,32 @@ public class ControladorDireccion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ControladorDireccion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ControladorDireccion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        Dirrecion dirrecion = new Dirrecion();
+        DAOFactory daof = DAOFactory.getDAOFactory(1);
+        HttpSession sesion = request.getSession();
+        Cliente cliente = (Cliente) sesion.getAttribute("cliente");
+
+        try {
+            BeanUtils.populate(dirrecion, request.getParameterMap());
+            String[] idcod = request.getParameter("idPuebloCd").split("/");
+            dirrecion.setIdPueblo(Integer.parseInt(idcod[0]));
+            dirrecion.setCodigoPostal(idcod[1]);
+            dirrecion.setIdCliente(cliente.getIdCliente());
+            String dirrecioprueba = dirrecion.getDireccion();
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ControladorDireccion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(ControladorDireccion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        IDirrecion dirreciondao = daof.getDirrecion();
+        dirreciondao.addDirrecion(dirrecion);
+        ArrayList<Dirrecion> dirreciones = new ArrayList();
+        dirreciones = (ArrayList<Dirrecion>) sesion.getAttribute("dirreciones");
+        dirreciones.add(dirrecion);
+        sesion.setAttribute("dirreciones", dirreciones);
+        request.setAttribute("mensaje", "Datos actualizado");
+        request.getRequestDispatcher("jsp/Accesos/panelCliente.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

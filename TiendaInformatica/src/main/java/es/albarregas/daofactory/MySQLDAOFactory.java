@@ -3,6 +3,7 @@ package es.albarregas.daofactory;
 import es.albarregas.dao.ICaracteristica;
 import es.albarregas.dao.ICategoria;
 import es.albarregas.dao.ICliente;
+import es.albarregas.dao.IDirrecion;
 import es.albarregas.dao.IImagen;
 import es.albarregas.dao.IProducto;
 import es.albarregas.dao.IProvincia;
@@ -11,6 +12,7 @@ import es.albarregas.dao.IUsuario;
 import es.albarregas.dao.MysqlCaracteristicas;
 import es.albarregas.dao.MysqlCategoriaDao;
 import es.albarregas.dao.MysqlClienteDao;
+import es.albarregas.dao.MysqlDirrecionDao;
 import es.albarregas.dao.MysqlImagen;
 import es.albarregas.dao.MysqlProducto;
 import es.albarregas.dao.MysqlProvinciaDao;
@@ -57,6 +59,11 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public IPueblo getPueblo() {
         return new MysqlPuebloDao();
+    }
+
+    @Override
+    public IDirrecion getDirrecion() {
+        return new MysqlDirrecionDao();
     }
 
 }
