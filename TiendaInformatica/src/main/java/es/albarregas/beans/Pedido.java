@@ -14,6 +14,7 @@ import java.sql.Date;
 public class Pedido {
     private int idPedido;
     private Date fecha;
+    //N en el carrito
     private String estado;
     private int idCliente;
     private float baseImponible;

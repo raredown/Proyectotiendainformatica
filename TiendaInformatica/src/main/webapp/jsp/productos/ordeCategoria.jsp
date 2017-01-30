@@ -61,7 +61,7 @@
                                             
                                             </div>
                                             <div class="col-md-6">
-                                                <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                                                <a onclick="addCarrito('<c:out value="${requestScope.productosId[0].idProducto}"/>')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
                                         </div>
 
                                         <p> </p>
@@ -108,7 +108,7 @@
                                                     <a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-eye-open"></span> Ver</a> 
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
+                                                    <a onclick="addCarrito('<c:out value="${requestScope.productosId[0].idProducto}"/>')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a></div>
                                             </div>
 
                                             <p> </p>

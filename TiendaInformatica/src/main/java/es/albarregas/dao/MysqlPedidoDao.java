@@ -24,12 +24,28 @@ public class MysqlPedidoDao implements IPedido {
     }
 
     @Override
-    public void addPedido(Pedido Pedido) {
+    public void addPedido(Pedido pedido) {
         String sql = "INSERT INTO pedidos (`Fecha`, `Estado`, `BaseImponible`, `Descuento`,`GastosEnvio`,`Iva`,`IdDireccion`,`IdCliente`) VALUES (?, ?, ?, ?, ?,?,?,?)";
         try {
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setDate(1, pedido.getFecha());
+            preparada.setString(2, pedido.getEstado());
+            preparada.setFloat(3, pedido.getBaseImponible());
+            preparada.setFloat(4, pedido.getDescuento());
+            preparada.setFloat(5, pedido.getGastoEnvio());
+            preparada.setFloat(6, pedido.getIva());
+            preparada.setInt(7, pedido.getIdDireccion());
+            if (pedido.getIdCliente() != 0) {
+                preparada.setInt(8, pedido.getIdCliente());
+            } else {
+                preparada.setNull(8, java.sql.Types.INTEGER);
+               
+            }
+            preparada.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(MysqlPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
         }
     }
 

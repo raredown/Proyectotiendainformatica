@@ -16,6 +16,6 @@
         <h1 class="text-success"><c:out value="${requestScope.productosId[0].precioUnitario}"/> €</h1>
         <p><c:out value="${requestScope.productosId[0].descripcion}"/></p>
         <p>Stock:  <c:out value="${requestScope.productosId[0].stock}"/></p>
-        <a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span>Comprar</a></div>
+        <a onclick="addCarrito('<c:out value="${requestScope.productosId[0].idProducto}"/>')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span>Comprar</a></div>
     </div>
 </div>

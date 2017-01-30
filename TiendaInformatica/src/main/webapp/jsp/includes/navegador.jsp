@@ -33,7 +33,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty sessionScope.usuario}">
-                    
+
                     <li><a href="${pageContext.request.contextPath}/jsp/Accesos/login.jsp"><span class="glyphicon glyphicon-user"></span> Login</a></li>
                     </c:if>
                     <c:if test="${not empty sessionScope.usuario}">
@@ -45,3 +45,8 @@
         </div>
     </div>
 </nav>
+<div class="alert alert-success" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Correcto! </strong>
+    Su producto se añadido correctamente.
+</div>

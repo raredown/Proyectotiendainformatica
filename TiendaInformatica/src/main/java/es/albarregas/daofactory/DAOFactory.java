@@ -4,7 +4,9 @@ import es.albarregas.dao.ICaracteristica;
 import es.albarregas.dao.ICategoria;
 import es.albarregas.dao.ICliente;
 import es.albarregas.dao.IDirrecion;
+import es.albarregas.dao.IGeneral;
 import es.albarregas.dao.IImagen;
+import es.albarregas.dao.IPedido;
 import es.albarregas.dao.IProducto;
 import es.albarregas.dao.IProvincia;
 import es.albarregas.dao.IPueblo;
@@ -31,6 +33,10 @@ public abstract class DAOFactory {
     public abstract IPueblo getPueblo();
     
     public abstract IDirrecion getDirrecion();
+    
+    public abstract IPedido getPedido();
+    
+    public abstract IGeneral getGeneral();
 
     public static DAOFactory getDAOFactory(int tipo) {
         DAOFactory daof = null;
