@@ -7,7 +7,9 @@ package es.albarregas.dao;
 
 import es.albarregas.beans.Pedido;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +22,37 @@ public class MysqlPedidoDao implements IPedido {
 
     @Override
     public ArrayList<Pedido> getPedido(String clausulaWhere) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Pedido> lista = new ArrayList();
+        if (clausulaWhere == null) {
+            clausulaWhere = "";
+        }
+        String consulta = "SELECT * FROM pedidos " + clausulaWhere;
+
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            try (ResultSet resultado = sentencia.executeQuery(consulta)) {
+                while (resultado.next()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setBaseImponible(resultado.getFloat("BaseImponible"));
+                    pedido.setDescuento(resultado.getFloat("Descuento"));
+                    pedido.setEstado(resultado.getString("Estado"));
+                    pedido.setFecha(resultado.getDate("Fecha"));
+                    pedido.setGastoEnvio(resultado.getFloat("GastosEnvio"));
+                    pedido.setIdCliente(resultado.getInt("IdCliente"));
+                    pedido.setIdDireccion(resultado.getInt("IdDireccion"));
+                    pedido.setIdPedido(resultado.getInt("IdPedido"));
+                    pedido.setIva(resultado.getFloat("Iva"));
+                    lista.add(pedido);
+
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+
+        return lista;
     }
 
     @Override
@@ -39,7 +71,7 @@ public class MysqlPedidoDao implements IPedido {
                 preparada.setInt(8, pedido.getIdCliente());
             } else {
                 preparada.setNull(8, java.sql.Types.INTEGER);
-               
+
             }
             preparada.executeUpdate();
         } catch (SQLException ex) {

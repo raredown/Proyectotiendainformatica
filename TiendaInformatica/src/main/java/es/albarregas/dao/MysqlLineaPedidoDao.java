@@ -25,14 +25,16 @@ public class MysqlLineaPedidoDao implements ILineaPedido {
 
     @Override
     public void addLineaPedido(LineaPedido lineaPedido) {
-        String sql = "INSERT INTO `empresaweb`.`lineaspedidos` (`IdPedido`, `IdProducto`, `Cantidad`, `PrecioUnitario`) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO `empresaweb`.`lineaspedidos` (`IdPedido`, `IdProducto`, `Cantidad`, `PrecioUnitario`,`NumeroLinea`) VALUES (?,?,?,?,?);";
 
         try {
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+
             preparada.setInt(1, lineaPedido.getIdPedido());
             preparada.setInt(2, lineaPedido.getIdProducto());
             preparada.setInt(3, lineaPedido.getCantidad());
             preparada.setFloat(4, lineaPedido.getPrecioUnitario());
+            preparada.setInt(5, lineaPedido.getNumeroLinea());
             preparada.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(MysqlLineaPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,7 +46,24 @@ public class MysqlLineaPedidoDao implements ILineaPedido {
 
     @Override
     public void updateLineaPedido(LineaPedido lineaPedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE `empresaweb`.`lineaspedidos` SET `IdProducto`=?, `Cantidad`=?, `PrecioUnitario`=? WHERE `IdPedido`=? and `NumeroLinea`=?;";
+
+        PreparedStatement preparada;
+        try {
+            preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setInt(1, lineaPedido.getIdProducto());
+            preparada.setInt(2, lineaPedido.getCantidad());
+            preparada.setFloat(3, lineaPedido.getPrecioUnitario());
+            preparada.setInt(4, lineaPedido.getIdPedido());
+
+            preparada.setInt(5, lineaPedido.getNumeroLinea());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlLineaPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+
     }
 
     @Override

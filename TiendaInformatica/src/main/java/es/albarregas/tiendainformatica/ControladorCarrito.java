@@ -7,14 +7,19 @@ package es.albarregas.tiendainformatica;
 
 import es.albarregas.beans.Cliente;
 import es.albarregas.beans.General;
+import es.albarregas.beans.LineaPedido;
 import es.albarregas.beans.Pedido;
 import es.albarregas.dao.IGeneral;
+import es.albarregas.dao.ILineaPedido;
 import es.albarregas.dao.IPedido;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +51,7 @@ public class ControladorCarrito extends HttpServlet {
 
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IPedido daopedido = daof.getPedido();
-//        IGeneral daogeneral = daof.getGeneral();
+            IGeneral daogeneral = daof.getGeneral();
 
             Pedido carritoPedido = new Pedido();
             //N es carrito
@@ -60,11 +65,93 @@ public class ControladorCarrito extends HttpServlet {
                 Cliente cliente = (Cliente) sesion.getAttribute("cliente");
                 carritoPedido.setIdCliente(cliente.getIdCliente());
             }
-//        General general = daogeneral.getGeneral();
-//        carritoPedido
+            General general;
+            general = daogeneral.getGeneral();
+            carritoPedido.setIva(general.getIva());
+            carritoPedido.setGastoEnvio(general.getGastoEnvios());
+
             daopedido.addPedido(carritoPedido);
+
+            //Añadimos la primera linea de pedido
+            LineaPedido lineapedido = new LineaPedido();
+            lineapedido.setIdPedido(carritoPedido.getIdPedido());
+
+            ServletContext ctx = getServletContext();
+            ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
+            Iterator<es.albarregas.beans.Producto> it = productos.iterator();
+
+            int idProducInt = Integer.parseInt(request.getParameter("idProducto"));
+
+            while (it.hasNext()) {
+                es.albarregas.beans.Producto productito = it.next();
+
+                if (idProducInt == productito.getIdProducto()) {
+                    lineapedido.setCantidad(1);
+                    lineapedido.setIdProducto(idProducInt);
+                    lineapedido.setPrecioUnitario(productito.getPrecioUnitario());
+                }
+            }
+
+            //Select * from pedidos order by IdPedido DESC LIMIT 1 el ultimo registro q lo acabo de meter
+            ArrayList<Pedido> carritoconid = daopedido.getPedido("order by IdPedido DESC LIMIT 1");
+            for (Pedido elemento : carritoconid) {
+                carritoPedido = elemento;
+            }
+            //Es la primera linea del pedido
+            lineapedido.setNumeroLinea(1);
+            lineapedido.setIdPedido(carritoPedido.getIdPedido());
+            ILineaPedido dailineapedida = daof.getLineaPedido();
+            dailineapedida.addLineaPedido(lineapedido);
+            ArrayList<LineaPedido> lineaspedidos = new ArrayList();
+            lineaspedidos.add(lineapedido);
+            // carritoPedido.setBaseImponible(lineapedido.getPrecioUnitario());
+            sesion.setAttribute("lineaspedidos", lineaspedidos);
             sesion.setAttribute("carrito", carritoPedido);
             //Para mostrar un mensaje al usuario
+            response.getWriter().write("ok");
+        } else if (sesion.getAttribute("lineaspedidos") != null) {
+            int idProducInt = Integer.parseInt(request.getParameter("idProducto"));
+            ArrayList<LineaPedido> lineaspedidos = (ArrayList<LineaPedido>) sesion.getAttribute("lineaspedidos");
+            LineaPedido lineapedido = new LineaPedido();
+            DAOFactory daof = DAOFactory.getDAOFactory(1);
+            for (LineaPedido elemento : lineaspedidos) {
+                if (idProducInt == elemento.getIdProducto()) {
+                    lineapedido = elemento;
+                    lineapedido.setCantidad(lineapedido.getCantidad() + 1);
+                    elemento.setCantidad(elemento.getCantidad() + 1);
+                }
+
+            }
+            //para comprobar si tenemos el producto ya en una linea de pedido
+            if (lineapedido.getIdProducto() == 0) {
+                ServletContext ctx = getServletContext();
+                ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
+                Iterator<es.albarregas.beans.Producto> it = productos.iterator();
+
+                Pedido carritoPedido = (Pedido) sesion.getAttribute("carrito");
+                lineapedido.setIdPedido(carritoPedido.getIdPedido());
+                while (it.hasNext()) {
+                    es.albarregas.beans.Producto productito = it.next();
+
+                    if (idProducInt == productito.getIdProducto()) {
+                        lineapedido.setCantidad(1);
+                        lineapedido.setIdProducto(idProducInt);
+                        lineapedido.setPrecioUnitario(productito.getPrecioUnitario());
+                    }
+                }
+                lineapedido.setNumeroLinea(lineaspedidos.size() + 1);
+
+                ILineaPedido dailineapedida = daof.getLineaPedido();
+                dailineapedida.addLineaPedido(lineapedido);
+                lineaspedidos.add(lineapedido);
+            } else {
+                ILineaPedido dailineapedida = daof.getLineaPedido();
+                dailineapedida.updateLineaPedido(lineapedido);
+
+            }
+
+            // carritoPedido.setBaseImponible(lineapedido.getPrecioUnitario());
+            sesion.setAttribute("lineaspedidos", lineaspedidos);
             response.getWriter().write("ok");
         }
     }

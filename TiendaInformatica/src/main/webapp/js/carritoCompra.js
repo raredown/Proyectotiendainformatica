@@ -9,10 +9,11 @@ $(document).ready(function () {
 
 function addCarrito(idProducto) {
 // alert(valorCaja1);
-
+    alert(idProducto);
+    var url = "ControladorCarrito?idProducto=" + idProducto;
     $.ajax({
-        url: "ControladorCarrito",
-        type: 'post',
+        url: url,
+        type: 'get',
         beforeSend: function () {
 //            $("#datitos").html("");
         },
