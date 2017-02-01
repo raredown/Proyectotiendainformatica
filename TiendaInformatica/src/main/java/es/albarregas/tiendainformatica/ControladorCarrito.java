@@ -46,90 +46,60 @@ public class ControladorCarrito extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        //si no ahi nada en el carrito tengo que hacer esto 
-        if (sesion.getAttribute("carrito") == null) {
+        Boolean tengoproducto = true;
+        ServletContext ctx2 = getServletContext();
+        ArrayList<es.albarregas.beans.Producto> productos2 = (ArrayList<es.albarregas.beans.Producto>) ctx2.getAttribute("productos");
+        Iterator<es.albarregas.beans.Producto> it2 = productos2.iterator();
 
-            DAOFactory daof = DAOFactory.getDAOFactory(1);
-            IPedido daopedido = daof.getPedido();
-            IGeneral daogeneral = daof.getGeneral();
+        int idProducInt2 = Integer.parseInt(request.getParameter("idProducto"));
 
-            Pedido carritoPedido = new Pedido();
-            //N es carrito
-            carritoPedido.setEstado("n");
-            Date fecha = new Date();
-            SimpleDateFormat plantilla = new SimpleDateFormat("dd/MM/yyyy H:mm");
-            String tiempo = plantilla.format(fecha);
-            java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
-            carritoPedido.setFecha(fechaSQL);
-            if (sesion.getAttribute("cliente") != null) {
-                Cliente cliente = (Cliente) sesion.getAttribute("cliente");
-                carritoPedido.setIdCliente(cliente.getIdCliente());
-            }
-            General general;
-            general = daogeneral.getGeneral();
-            carritoPedido.setIva(general.getIva());
-            carritoPedido.setGastoEnvio(general.getGastoEnvios());
+        while (it2.hasNext()) {
+            es.albarregas.beans.Producto productito = it2.next();
 
-            daopedido.addPedido(carritoPedido);
-
-            //Añadimos la primera linea de pedido
-            LineaPedido lineapedido = new LineaPedido();
-            lineapedido.setIdPedido(carritoPedido.getIdPedido());
-
-            ServletContext ctx = getServletContext();
-            ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
-            Iterator<es.albarregas.beans.Producto> it = productos.iterator();
-
-            int idProducInt = Integer.parseInt(request.getParameter("idProducto"));
-
-            while (it.hasNext()) {
-                es.albarregas.beans.Producto productito = it.next();
-
-                if (idProducInt == productito.getIdProducto()) {
-                    lineapedido.setCantidad(1);
-                    lineapedido.setIdProducto(idProducInt);
-                    lineapedido.setPrecioUnitario(productito.getPrecioUnitario());
+            if (idProducInt2 == productito.getIdProducto()) {
+                if ((productito.getStock() - 1) < 0) {
+                    tengoproducto = false;
                 }
             }
+        }
+        if (tengoproducto) {
 
-            //Select * from pedidos order by IdPedido DESC LIMIT 1 el ultimo registro q lo acabo de meter
-            ArrayList<Pedido> carritoconid = daopedido.getPedido("order by IdPedido DESC LIMIT 1");
-            for (Pedido elemento : carritoconid) {
-                carritoPedido = elemento;
-            }
-            //Es la primera linea del pedido
-            lineapedido.setNumeroLinea(1);
-            lineapedido.setIdPedido(carritoPedido.getIdPedido());
-            ILineaPedido dailineapedida = daof.getLineaPedido();
-            dailineapedida.addLineaPedido(lineapedido);
-            ArrayList<LineaPedido> lineaspedidos = new ArrayList();
-            lineaspedidos.add(lineapedido);
-            // carritoPedido.setBaseImponible(lineapedido.getPrecioUnitario());
-            sesion.setAttribute("lineaspedidos", lineaspedidos);
-            sesion.setAttribute("carrito", carritoPedido);
-            //Para mostrar un mensaje al usuario
-            response.getWriter().write("ok");
-        } else if (sesion.getAttribute("lineaspedidos") != null) {
-            int idProducInt = Integer.parseInt(request.getParameter("idProducto"));
-            ArrayList<LineaPedido> lineaspedidos = (ArrayList<LineaPedido>) sesion.getAttribute("lineaspedidos");
-            LineaPedido lineapedido = new LineaPedido();
-            DAOFactory daof = DAOFactory.getDAOFactory(1);
-            for (LineaPedido elemento : lineaspedidos) {
-                if (idProducInt == elemento.getIdProducto()) {
-                    lineapedido = elemento;
-                    lineapedido.setCantidad(lineapedido.getCantidad() + 1);
-                    elemento.setCantidad(elemento.getCantidad() + 1);
+            //si no ahi nada en el carrito tengo que hacer esto 
+            if (sesion.getAttribute("carrito") == null) {
+
+                DAOFactory daof = DAOFactory.getDAOFactory(1);
+                IPedido daopedido = daof.getPedido();
+                IGeneral daogeneral = daof.getGeneral();
+
+                Pedido carritoPedido = new Pedido();
+                //N es carrito
+                carritoPedido.setEstado("n");
+                Date fecha = new Date();
+                SimpleDateFormat plantilla = new SimpleDateFormat("dd/MM/yyyy H:mm");
+                String tiempo = plantilla.format(fecha);
+                java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
+                carritoPedido.setFecha(fechaSQL);
+                if (sesion.getAttribute("cliente") != null) {
+                    Cliente cliente = (Cliente) sesion.getAttribute("cliente");
+                    carritoPedido.setIdCliente(cliente.getIdCliente());
                 }
+                General general;
+                general = daogeneral.getGeneral();
+                carritoPedido.setIva(general.getIva());
+                carritoPedido.setGastoEnvio(general.getGastoEnvios());
 
-            }
-            //para comprobar si tenemos el producto ya en una linea de pedido
-            if (lineapedido.getIdProducto() == 0) {
+                daopedido.addPedido(carritoPedido);
+
+                //Añadimos la primera linea de pedido
+                LineaPedido lineapedido = new LineaPedido();
+                lineapedido.setIdPedido(carritoPedido.getIdPedido());
+
                 ServletContext ctx = getServletContext();
                 ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
                 Iterator<es.albarregas.beans.Producto> it = productos.iterator();
 
-                Pedido carritoPedido = (Pedido) sesion.getAttribute("carrito");
-                lineapedido.setIdPedido(carritoPedido.getIdPedido());
+                int idProducInt = Integer.parseInt(request.getParameter("idProducto"));
+
                 while (it.hasNext()) {
                     es.albarregas.beans.Producto productito = it.next();
 
@@ -139,20 +109,72 @@ public class ControladorCarrito extends HttpServlet {
                         lineapedido.setPrecioUnitario(productito.getPrecioUnitario());
                     }
                 }
-                lineapedido.setNumeroLinea(lineaspedidos.size() + 1);
 
+                //Select * from pedidos order by IdPedido DESC LIMIT 1 el ultimo registro q lo acabo de meter
+                ArrayList<Pedido> carritoconid = daopedido.getPedido("order by IdPedido DESC LIMIT 1");
+                for (Pedido elemento : carritoconid) {
+                    carritoPedido = elemento;
+                }
+                //Es la primera linea del pedido
+                lineapedido.setNumeroLinea(1);
+                lineapedido.setIdPedido(carritoPedido.getIdPedido());
                 ILineaPedido dailineapedida = daof.getLineaPedido();
                 dailineapedida.addLineaPedido(lineapedido);
+                ArrayList<LineaPedido> lineaspedidos = new ArrayList();
                 lineaspedidos.add(lineapedido);
-            } else {
-                ILineaPedido dailineapedida = daof.getLineaPedido();
-                dailineapedida.updateLineaPedido(lineapedido);
+                // carritoPedido.setBaseImponible(lineapedido.getPrecioUnitario());
+                sesion.setAttribute("lineaspedidos", lineaspedidos);
+                sesion.setAttribute("carrito", carritoPedido);
+                //Para mostrar un mensaje al usuario
+                response.getWriter().write("ok");
+            } else if (sesion.getAttribute("lineaspedidos") != null) {
+                int idProducInt = Integer.parseInt(request.getParameter("idProducto"));
+                ArrayList<LineaPedido> lineaspedidos = (ArrayList<LineaPedido>) sesion.getAttribute("lineaspedidos");
+                LineaPedido lineapedido = new LineaPedido();
+                DAOFactory daof = DAOFactory.getDAOFactory(1);
+                for (LineaPedido elemento : lineaspedidos) {
+                    if (idProducInt == elemento.getIdProducto()) {
+                        lineapedido = elemento;
+                        //Igualo la direcion de memoria por eso a elemento no tengo q sumarle uno a la cantidad
+                        lineapedido.setCantidad(lineapedido.getCantidad() + 1);
+                        // elemento.setCantidad(elemento.getCantidad() + 1);
+                    }
 
+                }
+                //para comprobar si tenemos el producto ya en una linea de pedido
+                if (lineapedido.getIdProducto() == 0) {
+                    ServletContext ctx = getServletContext();
+                    ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
+                    Iterator<es.albarregas.beans.Producto> it = productos.iterator();
+
+                    Pedido carritoPedido = (Pedido) sesion.getAttribute("carrito");
+                    lineapedido.setIdPedido(carritoPedido.getIdPedido());
+                    while (it.hasNext()) {
+                        es.albarregas.beans.Producto productito = it.next();
+
+                        if (idProducInt == productito.getIdProducto()) {
+                            lineapedido.setCantidad(1);
+                            lineapedido.setIdProducto(idProducInt);
+                            lineapedido.setPrecioUnitario(productito.getPrecioUnitario());
+                        }
+                    }
+                    lineapedido.setNumeroLinea(lineaspedidos.size() + 1);
+
+                    ILineaPedido dailineapedida = daof.getLineaPedido();
+                    dailineapedida.addLineaPedido(lineapedido);
+                    lineaspedidos.add(lineapedido);
+                } else {
+                    ILineaPedido dailineapedida = daof.getLineaPedido();
+                    dailineapedida.updateLineaPedido(lineapedido);
+
+                }
+
+                // carritoPedido.setBaseImponible(lineapedido.getPrecioUnitario());
+                sesion.setAttribute("lineaspedidos", lineaspedidos);
+                response.getWriter().write("ok");
             }
-
-            // carritoPedido.setBaseImponible(lineapedido.getPrecioUnitario());
-            sesion.setAttribute("lineaspedidos", lineaspedidos);
-            response.getWriter().write("ok");
+        } else {
+            response.getWriter().write("mal");
         }
     }
 

@@ -32,12 +32,13 @@
                 </form>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <c:if test="${empty sessionScope.usuario}">
+                <li><a href="PanelCarrito"><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
+                    <c:if test="${empty sessionScope.usuario}">
 
                     <li><a href="${pageContext.request.contextPath}/jsp/Accesos/login.jsp"><span class="glyphicon glyphicon-user"></span> Login</a></li>
                     </c:if>
                     <c:if test="${not empty sessionScope.usuario}">
-                    <li><a href="Login"><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
+
                     <li><a href="ConCliente"><span class="glyphicon glyphicon-user"></span> <c:out value="${sessionScope.usuario.username}"/></a></li>
                     <li><a href="Login"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
                     </c:if>
