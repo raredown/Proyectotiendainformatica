@@ -105,6 +105,7 @@ public class ControladorCarrito extends HttpServlet {
 
                     if (idProducInt == productito.getIdProducto()) {
                         lineapedido.setCantidad(1);
+                        lineapedido.setProducto(productito);
                         lineapedido.setIdProducto(idProducInt);
                         lineapedido.setPrecioUnitario(productito.getPrecioUnitario());
                     }
@@ -156,6 +157,8 @@ public class ControladorCarrito extends HttpServlet {
                             lineapedido.setCantidad(1);
                             lineapedido.setIdProducto(idProducInt);
                             lineapedido.setPrecioUnitario(productito.getPrecioUnitario());
+                            lineapedido.setProducto(productito);
+
                         }
                     }
                     lineapedido.setNumeroLinea(lineaspedidos.size() + 1);

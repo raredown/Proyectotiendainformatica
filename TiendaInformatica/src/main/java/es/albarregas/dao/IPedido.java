@@ -19,6 +19,8 @@ public interface IPedido {
     public void addPedido(Pedido Pedido);
 
     public void updatePedido(Pedido Pedido);
+    
+    public void deletePedido(Pedido pedido);
 
     public void closeConnection();
 

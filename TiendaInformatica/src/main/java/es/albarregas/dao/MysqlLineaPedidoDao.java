@@ -68,7 +68,18 @@ public class MysqlLineaPedidoDao implements ILineaPedido {
 
     @Override
     public void deleteLineaPedido(LineaPedido lineaPedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM `empresaweb`.`lineaspedidos` WHERE  `IdPedido`=? AND `NumeroLinea`=?;";
+        PreparedStatement preparada;
+        try {
+            preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setInt(1, lineaPedido.getIdPedido());
+            preparada.setInt(2, lineaPedido.getNumeroLinea());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlLineaPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
     }
 
     @Override

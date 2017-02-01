@@ -49,5 +49,15 @@
 <div class="alert alert-success" id="success-alert">
     <button type="button" class="close" data-dismiss="alert">x</button>
     <strong>Correcto! </strong>
-    Su producto se añadido correctamente.
+    Su producto se ha añadido correctamente.
+</div>
+<div class="alert alert-danger" id="danger-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Fallo! </strong>
+    No nos queda mas productos en stock.
+</div>
+<div class="alert alert-danger" id="danger-borrado">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Correcto! </strong>
+    Su producto se ha borrado correctamente.
 </div>

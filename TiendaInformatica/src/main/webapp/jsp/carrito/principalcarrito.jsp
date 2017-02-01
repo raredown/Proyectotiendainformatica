@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,41 +28,22 @@
                             <div class="panel-title">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+                                        <h5><span class="glyphicon glyphicon-shopping-cart"></span> Carrito de la compra</h5>
                                     </div>
                                     <div class="col-xs-6">
-                                        <button type="button" class="btn btn-primary btn-sm btn-block">
-                                            <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-                                        </button>
+                                        <div class="col-xs-2"></div>
+                                        <div class="col-xs-4">
+                                            <button type="button" class="btn btn-primary btn-sm btn-block">
+                                                <span class="glyphicon glyphicon-share-alt"></span> Continuar comprando
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
-                            <c:forEach var="i"  items="${sessionScope.lineaspedidos}">
 
-                                <div class="row">
-                                    <div class="col-xs-2"><img class="img-responsive" src="image/imagenesProductos/imagenesProductos/<c:out value="${applicationScope.productos[0].listaImagenes[0].image}"/>" width="90px" height="70px">
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="col-xs-6 text-right">
-                                            <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <input type="text" class="form-control input-sm" value="1">
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <button type="button" class="btn btn-link btn-xs">
-                                                <span class="glyphicon glyphicon-trash"> </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </c:forEach>
+
                             <div class="row">
                                 <div class="col-xs-2">
                                 </div>
@@ -70,31 +52,53 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="col-xs-6 text-right">
-                                        <h2><strong>Precio </strong></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-xs-2">
-                                </div>
-                                <div class="col-xs-4">
-                                    <h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="col-xs-6 text-right">
-                                        <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
+                                        <h3><strong>Precio </strong></h3>
                                     </div>
                                     <div class="col-xs-4">
-                                        <input type="text" class="form-control input-sm" value="1">
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <button type="button" class="btn btn-link btn-xs">
-                                            <span class="glyphicon glyphicon-trash"> </span>
-                                        </button>
+                                        <h3 class="product-name"><strong>Cantidad</strong></h3>
                                     </div>
                                 </div>
+
                             </div>
+                            <c:forEach var="i"  items="${sessionScope.lineaspedidos}">
+                                <c:set var="string2" value="${fn:substring(i.producto.descripcion, 0, 45)}" />
+                                <div class="row" id="<c:out value="${i.numeroLinea}"/>">
+
+                                    <div class="col-xs-2">
+                                        <img src="image/imagenesProductos/imagenesProductos/<c:out value="${i.producto.listaImagenes[0].image}"/>" alt="producto" style="width: 72px; height: 72px;">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <h4 class="product-name"><strong><c:out value="${i.producto.denominacion}"/></strong></h4><h4><small><c:out value="${string2}"/>...</small></h4>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="col-xs-6 text-right">
+                                            <c:out value="${i.precioUnitario}"/> €
+                                        </div>
+                                        <div class="col-xs-4">
+
+
+                                            <input type="text" id="input<c:out value="${i.numeroLinea}"/>" class="form-control text-center" readonly value=" <c:out value="${i.cantidad}"/>">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="button" class="btn btn-link btn-xs" onclick="addLinea('<c:out value="${i.numeroLinea}"/>','add')">
+                                                <span class="glyphicon glyphicon-plus "> </span>
+                                            </button> 
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button type="button" class="btn btn-link btn-xs" onclick="menosLinea('<c:out value="${i.numeroLinea}"/>')">
+                                                <span class="glyphicon glyphicon-minus"> </span>
+                                            </button> 
+
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-link btn-xs" onclick="deleteLinea('<c:out value="${i.numeroLinea}"/>')">
+                                                <span class="glyphicon glyphicon-trash"> </span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
+                            </c:forEach>
+
                             <hr>
                             <div class="row">
                                 <div class="text-center">
@@ -112,11 +116,11 @@
                         <div class="panel-footer">
                             <div class="row text-center">
                                 <div class="col-xs-9">
-                                    <h4 class="text-right">Total <strong>$50.00</strong></h4>
+                                    <h4 class="text-right">Total <strong id='baseImponible'><c:out value="${sessionScope.carrito.baseImponible}" default="0"/> </strong> €</h4>
                                 </div>
                                 <div class="col-xs-3">
                                     <button type="button" class="btn btn-success btn-block">
-                                        Checkout
+                                        Comprar¡
                                     </button>
                                 </div>
                             </div>

@@ -5,13 +5,20 @@
  */
 package es.albarregas.tiendainformatica;
 
+import es.albarregas.beans.LineaPedido;
+import es.albarregas.beans.Pedido;
+import es.albarregas.dao.ILineaPedido;
+import es.albarregas.dao.IPedido;
+import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,8 +38,80 @@ public class PanelCarrito extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("jsp/carrito/principalcarrito.jsp").forward(request, response);
+        HttpSession sesion = request.getSession();
+        ArrayList<LineaPedido> lineaspedidos = (ArrayList<LineaPedido>) sesion.getAttribute("lineaspedidos");
+        if (request.getParameter("idLinea") == null) {
+            request.getRequestDispatcher("jsp/carrito/principalcarrito.jsp").forward(request, response);
+        } else if (request.getParameter("accion") != null) {
+//          
+            //para sumar cantidar o para restar
+            DAOFactory daof = DAOFactory.getDAOFactory(1);
+            ILineaPedido dailineapedida = daof.getLineaPedido();
 
+            if (request.getParameter("accion").equals("add")) {
+
+                for (LineaPedido elemento : lineaspedidos) {
+                    if (request.getParameter("idLinea").equals(Integer.toString(elemento.getNumeroLinea()))) {
+                        if (elemento.getProducto().getStock() - (elemento.getCantidad() + 1) >= 0) {
+                            elemento.setCantidad(elemento.getCantidad() + 1);
+                            dailineapedida.updateLineaPedido(elemento);
+                            String pruebas = Integer.toString(elemento.getCantidad());
+                            response.getWriter().write(pruebas);
+                        } else {
+                            response.getWriter().write("0");
+                        }
+                    }
+
+                }
+
+            } else if (request.getParameter("accion").equals("menos")) {
+                LineaPedido lineaborrada = null;
+                for (LineaPedido elemento : lineaspedidos) {
+
+                    if (request.getParameter("idLinea").equals(Integer.toString(elemento.getNumeroLinea()))) {
+                        if ((elemento.getCantidad() - 1) >= 1) {
+                            elemento.setCantidad(elemento.getCantidad() - 1);
+                            dailineapedida.updateLineaPedido(elemento);
+                            String pruebas = Integer.toString(elemento.getCantidad());
+                            response.getWriter().write(pruebas);
+                        } else {
+                            dailineapedida.deleteLineaPedido(elemento);
+                            // lineaspedidos.remove(elemento);
+                            lineaborrada = elemento;
+                            String pruebas = "0";
+                            response.getWriter().write(pruebas);
+
+                        }
+                    }
+                }
+                if (lineaborrada != null) {
+                    lineaspedidos.remove(lineaborrada);
+                }
+
+            } else if (request.getParameter("accion").equals("delete")) {
+                LineaPedido lineaborrada = new LineaPedido();
+                for (LineaPedido elemento : lineaspedidos) {
+                    if (request.getParameter("idLinea").equals(Integer.toString(elemento.getNumeroLinea()))) {
+                        dailineapedida.deleteLineaPedido(elemento);
+                        lineaborrada = elemento;
+                        //lineaspedidos.remove(elemento);
+                        String pruebas = "0";
+                        response.getWriter().write(pruebas);
+
+                    }
+                }
+                lineaspedidos.remove(lineaborrada);
+            }
+        }
+        if (lineaspedidos.isEmpty()) {
+            DAOFactory daof = DAOFactory.getDAOFactory(1);
+             IPedido daopedido = daof.getPedido();
+             daopedido.deletePedido((Pedido) sesion.getAttribute("carrito"));
+            sesion.removeAttribute("lineaspedidos");
+            sesion.removeAttribute("carrito");
+        } else {
+            sesion.setAttribute("lineaspedidos", lineaspedidos);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,7 +140,23 @@ public class PanelCarrito extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession sesion = request.getSession();
+
+        if (sesion.getAttribute("carrito") != null) {
+            DAOFactory daof = DAOFactory.getDAOFactory(1);
+            IPedido daopedido = daof.getPedido();
+            ArrayList<LineaPedido> lineaspedidos = (ArrayList<LineaPedido>) sesion.getAttribute("lineaspedidos");
+            Pedido carrito = (Pedido) sesion.getAttribute("carrito");
+            float baseimponible = 0;
+            for (LineaPedido elemento : lineaspedidos) {
+                baseimponible = baseimponible + (elemento.getCantidad() * elemento.getPrecioUnitario());
+            }
+            carrito.setBaseImponible(baseimponible);
+            daopedido.updatePedido(carrito);
+            sesion.setAttribute("carrito", carrito);
+            response.getWriter().write(Float.toString(baseimponible));
+        }
+
     }
 
     /**

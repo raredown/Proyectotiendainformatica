@@ -15,6 +15,15 @@ public class LineaPedido {
     private int idProducto;
     private int cantidad;
     private float precioUnitario;
+    private Producto producto;
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 
     public int getIdPedido() {
         return idPedido;

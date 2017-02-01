@@ -82,13 +82,50 @@ public class MysqlPedidoDao implements IPedido {
     }
 
     @Override
-    public void updatePedido(Pedido Pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updatePedido(Pedido pedido) {
+        String sql = "UPDATE pedidos set `Fecha` = ?, `Estado` = ?, `BaseImponible` = ?, `Descuento`= ?,`GastosEnvio`= ?,`Iva`= ?,`IdDireccion`= ?,`IdCliente`= ? WHERE `IdPedido`=? ";
+        try {
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setDate(1, pedido.getFecha());
+            preparada.setString(2, pedido.getEstado());
+            preparada.setFloat(3, pedido.getBaseImponible());
+            preparada.setFloat(4, pedido.getDescuento());
+            preparada.setFloat(5, pedido.getGastoEnvio());
+            preparada.setFloat(6, pedido.getIva());
+            preparada.setInt(7, pedido.getIdDireccion());
+            if (pedido.getIdCliente() != 0) {
+                preparada.setInt(8, pedido.getIdCliente());
+            } else {
+                preparada.setNull(8, java.sql.Types.INTEGER);
+
+            }
+            preparada.setInt(9, pedido.getIdPedido());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+
     }
 
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void deletePedido(Pedido pedido) {
+        String sql = "DELETE FROM `empresaweb`.`pedidos` WHERE  `IdPedido`=?";
+        try {
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setInt(1, pedido.getIdPedido());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
     }
 
 }
