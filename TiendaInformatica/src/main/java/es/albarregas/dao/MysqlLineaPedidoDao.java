@@ -7,7 +7,9 @@ package es.albarregas.dao;
 
 import es.albarregas.beans.LineaPedido;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +22,32 @@ public class MysqlLineaPedidoDao implements ILineaPedido {
 
     @Override
     public ArrayList<LineaPedido> getLineaPedido(String clausulaWhere) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<LineaPedido> lista = new ArrayList();
+        if (clausulaWhere == null) {
+            clausulaWhere = "";
+        }
+        String consulta = "SELECT * FROM lineaspedidos " + clausulaWhere;
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            try (ResultSet resultado = sentencia.executeQuery(consulta)) {
+                while (resultado.next()) {
+                    LineaPedido linepe = new LineaPedido();
+                    
+                    linepe.setIdPedido(resultado.getInt("IdPedido"));
+                    linepe.setIdProducto(resultado.getInt("IdProducto"));
+                    linepe.setNumeroLinea(resultado.getInt("NumeroLinea"));
+                    linepe.setPrecioUnitario(resultado.getFloat("PrecioUnitario"));
+                    linepe.setCantidad(resultado.getInt("Cantidad"));
+                    lista.add(linepe);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+        return lista;
+
     }
 
     @Override

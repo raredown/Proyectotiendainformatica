@@ -5,6 +5,7 @@
  */
 package es.albarregas.tiendainformatica;
 
+import es.albarregas.beans.Cliente;
 import es.albarregas.beans.LineaPedido;
 import es.albarregas.beans.Pedido;
 import es.albarregas.dao.ILineaPedido;
@@ -145,8 +146,14 @@ public class PanelCarrito extends HttpServlet {
         if (sesion.getAttribute("carrito") != null) {
             DAOFactory daof = DAOFactory.getDAOFactory(1);
             IPedido daopedido = daof.getPedido();
+            
             ArrayList<LineaPedido> lineaspedidos = (ArrayList<LineaPedido>) sesion.getAttribute("lineaspedidos");
             Pedido carrito = (Pedido) sesion.getAttribute("carrito");
+            if (sesion.getAttribute("cliente")!=null) {
+                Cliente clienteactualizado = (Cliente) sesion.getAttribute("cliente");
+                 carrito.setIdCliente(clienteactualizado.getIdCliente());
+            }
+           
             float baseimponible = 0;
             for (LineaPedido elemento : lineaspedidos) {
                 baseimponible = baseimponible + (elemento.getCantidad() * elemento.getPrecioUnitario());

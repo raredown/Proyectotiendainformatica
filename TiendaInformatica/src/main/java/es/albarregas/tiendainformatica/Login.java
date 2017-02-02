@@ -7,9 +7,13 @@ package es.albarregas.tiendainformatica;
 
 import es.albarregas.beans.Cliente;
 import es.albarregas.beans.Dirrecion;
+import es.albarregas.beans.LineaPedido;
+import es.albarregas.beans.Pedido;
 import es.albarregas.beans.Usuario;
 import es.albarregas.dao.ICliente;
 import es.albarregas.dao.IDirrecion;
+import es.albarregas.dao.ILineaPedido;
+import es.albarregas.dao.IPedido;
 import es.albarregas.dao.IUsuario;
 import es.albarregas.daofactory.DAOFactory;
 import es.albarregas.modelos.Formularios;
@@ -17,6 +21,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -76,8 +81,65 @@ public class Login extends HttpServlet {
                             sesion.setAttribute("cliente", elemento2);
                             IDirrecion dirredao = daof.getDirrecion();
                             ArrayList<Dirrecion> dirreciones = new ArrayList();
-                            dirreciones = dirredao.getDirrecion("where IdCliente =" +elemento2.getIdCliente());
+                            dirreciones = dirredao.getDirrecion("where IdCliente =" + elemento2.getIdCliente());
                             sesion.setAttribute("dirreciones", dirreciones);
+
+                            //Metemos dirreciones
+                            IPedido daopedido = daof.getPedido();
+                            ArrayList<Pedido> pedidos = new ArrayList();
+                            pedidos = daopedido.getPedido("where IdCliente=" + elemento2.getIdCliente());
+                            sesion.setAttribute("pedidos", pedidos);
+                            for (Pedido pedidito : pedidos) {
+                                //ya tiene un pedido en el carrito en la base de datos
+                                if (pedidito.getEstado().equals("n")) {
+                                    //compruebo si exite el carrito 
+                                    if (sesion.getAttribute("carrito") == null) {
+                                        sesion.setAttribute("carrito", pedidito);
+                                        ILineaPedido daolineapedi = daof.getLineaPedido();
+                                        ArrayList<LineaPedido> lineasPedido = new ArrayList();
+                                        lineasPedido = daolineapedi.getLineaPedido("where IdPedido=" + pedidito.getIdPedido());
+                                        ServletContext ctx = getServletContext();
+                                        ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
+                                        for (LineaPedido lineaactual : lineasPedido) {
+                                            for (es.albarregas.beans.Producto prod : productos) {
+                                                if (prod.getIdProducto() == lineaactual.getIdProducto()) {
+                                                    lineaactual.setProducto(prod);
+                                                }
+                                            }
+                                        }
+                                        sesion.setAttribute("lineaspedidos", lineasPedido);
+                                    } //si ahi algo en el carrito lo meteremos en su antiguo carrito
+                                    else {
+                                        Pedido carritoPedido = (Pedido) sesion.getAttribute("carrito");
+                                        ILineaPedido daolineapedi = daof.getLineaPedido();
+                                        ArrayList<LineaPedido> lineasPedidoSesion = (ArrayList<LineaPedido>) sesion.getAttribute("lineaspedidos");
+                                        ArrayList<LineaPedido> lineasPedido = daolineapedi.getLineaPedido("where IdPedido=" + pedidito.getIdPedido());
+                                        ServletContext ctx = getServletContext();
+                                        ArrayList<es.albarregas.beans.Producto> productos = (ArrayList<es.albarregas.beans.Producto>) ctx.getAttribute("productos");
+                                        for (LineaPedido lineaactual : lineasPedido) {
+
+                                            for (es.albarregas.beans.Producto prod : productos) {
+                                                if (prod.getIdProducto() == lineaactual.getIdProducto()) {
+                                                    lineaactual.setProducto(prod);
+                                                }
+                                            }
+                                        }
+                                        for (LineaPedido lineadeSesion : lineasPedidoSesion) {
+                                            lineasPedido.add(lineadeSesion);
+                                            lineadeSesion.setNumeroLinea(lineasPedidoSesion.size() + 1);
+                                            lineadeSesion.setIdPedido(pedidito.getIdPedido());
+                                            daolineapedi.addLineaPedido(lineadeSesion);
+                                        }
+
+                                        daopedido.deletePedido(carritoPedido);
+                                        sesion.setAttribute("lineaspedidos", lineasPedido);
+                                        sesion.setAttribute("carrito", pedidito);
+
+                                    }
+                                }
+                            }//for pedido
+                            
+                            
                         }
                     }
 
