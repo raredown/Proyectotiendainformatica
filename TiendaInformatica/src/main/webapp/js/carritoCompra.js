@@ -7,6 +7,8 @@ $(document).ready(function () {
     $("#success-alert").hide();
     $("#danger-alert").hide();
     $("#danger-borrado").hide();
+    $("#peligromensaje").hide();
+    mostrarmensaje();
     actualizarTotal();
 
 });
@@ -155,4 +157,11 @@ function actualizarTotal() {
     });
 
 }
-
+function mostrarmensaje() {
+   // alert($("#inputmensajito").val());
+    if ($("#inputmensajito").val() == 1) {
+        $("#peligromensaje").fadeTo(4000, 500).slideUp(500, function () {
+            $("#peligromensaje").slideUp(500);
+        });
+    }
+}

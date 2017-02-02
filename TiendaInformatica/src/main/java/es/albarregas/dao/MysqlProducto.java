@@ -6,6 +6,7 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Producto;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,7 +32,7 @@ public class MysqlProducto implements IProducto {
             try (ResultSet resultado = sentencia.executeQuery(consulta)) {
                 while (resultado.next()) {
                     Producto producto = new Producto();
-                 
+
                     producto.setDechaAlta(resultado.getDate("FechaAlta"));
                     producto.setDenominacion(resultado.getString("Denominacion"));
                     producto.setDescripcion(resultado.getString("Descripcion"));
@@ -45,9 +46,9 @@ public class MysqlProducto implements IProducto {
                     producto.setRating(resultado.getInt("Rating"));
                     producto.setStock(resultado.getInt("Stock"));
                     producto.setStockMinimo(resultado.getInt("StockMinimo"));
-                    
+
                     lista.add(producto);
-                 
+
                 }
             }
         } catch (SQLException ex) {
@@ -61,6 +62,28 @@ public class MysqlProducto implements IProducto {
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void updateProducto(Producto producto) {
+        String sql = "UPDATE `empresaweb`.`productos` SET `Denominacion`=?, `IdProveedor`=?, `PrecioUnitario`=?, `Stock`=?, `StockMinimo`=?, `Oferta`=?, `FueraCatalogo`=?, `Rating`=? WHERE  `IdProducto`=?;";
+        try {
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setString(1, producto.getDenominacion());
+            preparada.setInt(2, producto.getIdProvedor());
+            preparada.setFloat(3, producto.getPrecioUnitario());
+            preparada.setInt(4, producto.getStock());
+            preparada.setInt(5, producto.getStockMinimo());
+            preparada.setString(6, producto.getOferta());
+            preparada.setString(7, producto.getFueraCatalogo());
+            preparada.setInt(8, producto.getRating());
+            preparada.setInt(9, producto.getIdProducto());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlProvinciaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
     }
 
 }

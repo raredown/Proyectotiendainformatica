@@ -79,7 +79,7 @@
 
                                             <input type="text" id="input<c:out value="${i.numeroLinea}"/>" class="form-control text-center" readonly value=" <c:out value="${i.cantidad}"/>">
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="button" class="btn btn-link btn-xs" onclick="addLinea('<c:out value="${i.numeroLinea}"/>','add')">
+                                            <button type="button" class="btn btn-link btn-xs" onclick="addLinea('<c:out value="${i.numeroLinea}"/>', 'add')">
                                                 <span class="glyphicon glyphicon-plus "> </span>
                                             </button> 
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -119,9 +119,11 @@
                                     <h4 class="text-right">Total <strong id='baseImponible'><c:out value="${sessionScope.carrito.baseImponible}" default="0"/> </strong> €</h4>
                                 </div>
                                 <div class="col-xs-3">
-                                    <button type="button" class="btn btn-success btn-block">
+
+                                    <button type="button" class="btn btn-success btn-block" onclick="window.location.href = 'ConclusionCarrito'">
                                         Comprar¡
                                     </button>
+
                                 </div>
                             </div>
                         </div>

@@ -61,3 +61,9 @@
     <strong>Correcto! </strong>
     Su producto se ha borrado correctamente.
 </div>
+<input type="hidden" value="<c:out value="${requestScope.inputmensaje}" default="0"/>" id="inputmensajito" >
+<div class="alert alert-danger" id="peligromensaje">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Fallo! </strong>
+    <c:out value="${requestScope.mensajeCarrito}"/>
+</div>

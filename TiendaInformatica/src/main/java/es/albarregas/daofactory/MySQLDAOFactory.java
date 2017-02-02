@@ -6,6 +6,7 @@ import es.albarregas.dao.ICliente;
 import es.albarregas.dao.IDirrecion;
 import es.albarregas.dao.IGeneral;
 import es.albarregas.dao.IImagen;
+import es.albarregas.dao.IInnerJoin;
 import es.albarregas.dao.ILineaPedido;
 import es.albarregas.dao.IPedido;
 import es.albarregas.dao.IProducto;
@@ -18,6 +19,7 @@ import es.albarregas.dao.MysqlClienteDao;
 import es.albarregas.dao.MysqlDirrecionDao;
 import es.albarregas.dao.MysqlGeneral;
 import es.albarregas.dao.MysqlImagen;
+import es.albarregas.dao.MysqlInnerJoin;
 import es.albarregas.dao.MysqlLineaPedidoDao;
 import es.albarregas.dao.MysqlPedidoDao;
 import es.albarregas.dao.MysqlProducto;
@@ -84,7 +86,12 @@ public class MySQLDAOFactory extends DAOFactory {
 
     @Override
     public ILineaPedido getLineaPedido() {
-       return new MysqlLineaPedidoDao();
+        return new MysqlLineaPedidoDao();
+    }
+
+    @Override
+    public IInnerJoin getInnerJoin() {
+        return new MysqlInnerJoin();
     }
 
 }

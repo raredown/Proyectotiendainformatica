@@ -62,7 +62,9 @@ public class ControladorDireccion extends HttpServlet {
         IDirrecion dirreciondao = daof.getDirrecion();
         dirreciondao.addDirrecion(dirrecion);
         ArrayList<Dirrecion> dirreciones = new ArrayList();
-        dirreciones = (ArrayList<Dirrecion>) sesion.getAttribute("dirreciones");
+        if (sesion.getAttribute("dirreciones") != null) {
+            dirreciones = (ArrayList<Dirrecion>) sesion.getAttribute("dirreciones");
+        }
         dirreciones.add(dirrecion);
         sesion.setAttribute("dirreciones", dirreciones);
         request.setAttribute("mensaje", "Datos actualizado");

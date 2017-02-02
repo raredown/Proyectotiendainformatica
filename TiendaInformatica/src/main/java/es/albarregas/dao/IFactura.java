@@ -5,16 +5,16 @@
  */
 package es.albarregas.dao;
 
-import es.albarregas.beans.Producto;
-import java.util.ArrayList;
+import es.albarregas.beans.Factura;
 
 /**
  *
  * @author rafa
  */
-public interface IProducto {
-    public ArrayList<Producto> getProducto(String clausulaWhere);
-    public void updateProducto(Producto producto);
+public interface IFactura {
+
+    public void addFactura(Factura factura);
+
     public void closeConnection();
-    
+
 }

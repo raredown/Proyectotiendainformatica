@@ -6,6 +6,7 @@ import es.albarregas.dao.ICliente;
 import es.albarregas.dao.IDirrecion;
 import es.albarregas.dao.IGeneral;
 import es.albarregas.dao.IImagen;
+import es.albarregas.dao.IInnerJoin;
 import es.albarregas.dao.ILineaPedido;
 import es.albarregas.dao.IPedido;
 import es.albarregas.dao.IProducto;
@@ -40,6 +41,8 @@ public abstract class DAOFactory {
     public abstract IGeneral getGeneral();
     
     public abstract ILineaPedido getLineaPedido();
+    
+    public abstract  IInnerJoin getInnerJoin();
 
     public static DAOFactory getDAOFactory(int tipo) {
         DAOFactory daof = null;
