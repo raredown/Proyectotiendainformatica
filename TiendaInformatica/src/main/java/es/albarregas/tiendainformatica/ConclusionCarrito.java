@@ -6,9 +6,11 @@
 package es.albarregas.tiendainformatica;
 
 import es.albarregas.beans.Cliente;
+import es.albarregas.beans.Factura;
 import es.albarregas.beans.LineaPedido;
 import es.albarregas.beans.MostraFactura;
 import es.albarregas.beans.Pedido;
+import es.albarregas.dao.IFactura;
 import es.albarregas.dao.IInnerJoin;
 import es.albarregas.dao.IPedido;
 import es.albarregas.dao.IProducto;
@@ -128,7 +130,12 @@ public class ConclusionCarrito extends HttpServlet {
             Cliente cliente = (Cliente) sesion.getAttribute("cliente");
             mostrarFactura.setNombreCliente(cliente.getNombre());
             mostrarFactura.setEmail(cliente.getEmail());
-
+            IFactura daofactura = daof.getFactura();
+            Factura factura = new  Factura();
+            factura.setIdPedido(carrito.getIdPedido());
+            daofactura.addFactura(factura);
+            factura = daofactura.getoneFactura(Integer.toString(carrito.getIdPedido()));
+            mostrarFactura.setNumeroFactura(factura.getNumeroDeFactura());
             //^^^^^^^^^^^^^^^^^^^^^^^^
             sesion.removeAttribute("carrito");
             sesion.removeAttribute("lineaspedidos");

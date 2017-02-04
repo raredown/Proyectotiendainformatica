@@ -4,6 +4,7 @@ import es.albarregas.dao.ICaracteristica;
 import es.albarregas.dao.ICategoria;
 import es.albarregas.dao.ICliente;
 import es.albarregas.dao.IDirrecion;
+import es.albarregas.dao.IFactura;
 import es.albarregas.dao.IGeneral;
 import es.albarregas.dao.IImagen;
 import es.albarregas.dao.IInnerJoin;
@@ -17,6 +18,7 @@ import es.albarregas.dao.MysqlCaracteristicas;
 import es.albarregas.dao.MysqlCategoriaDao;
 import es.albarregas.dao.MysqlClienteDao;
 import es.albarregas.dao.MysqlDirrecionDao;
+import es.albarregas.dao.MysqlFacturaDao;
 import es.albarregas.dao.MysqlGeneral;
 import es.albarregas.dao.MysqlImagen;
 import es.albarregas.dao.MysqlInnerJoin;
@@ -92,6 +94,11 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public IInnerJoin getInnerJoin() {
         return new MysqlInnerJoin();
+    }
+
+    @Override
+    public IFactura getFactura() {
+        return new MysqlFacturaDao();
     }
 
 }

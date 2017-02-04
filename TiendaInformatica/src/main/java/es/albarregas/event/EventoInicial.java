@@ -38,7 +38,7 @@ public class EventoInicial implements ServletContextListener {
 
         IImagen daoimagen = daof.getImagen();
         categorias = daocategoria.getCategoria("");
-        productos = daoproducto.getProducto("");
+        productos = daoproducto.getProducto("where FueraCatalogo='n'");
         Iterator<Producto> it = productos.iterator();
 
         while (it.hasNext()) {

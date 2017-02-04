@@ -67,7 +67,7 @@ public class MysqlUsuarioDao implements IUsuario {
             preparada.setString(2, usuario.getClave());
             preparada.executeUpdate();
         } catch (SQLException ex) {
-            
+
             Logger.getLogger(MysqlUsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             this.closeConnection();
@@ -77,9 +77,39 @@ public class MysqlUsuarioDao implements IUsuario {
     @Override
     public void updateUsuario(Usuario usuario) {
         try {
-            String sql ="UPDATE `empresaweb`.`usuarios` SET `Clave`=? WHERE  `IdUsuario`=?;";
+            String sql = "UPDATE `empresaweb`.`usuarios` SET `Clave`=? WHERE  `IdUsuario`=?;";
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
-            preparada.setString(1,usuario.getClave());
+            preparada.setString(1, usuario.getClave());
+            preparada.setInt(2, usuario.getIdUsuario());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+    }
+
+    @Override
+    public void actualizarUsuarioBloquead(Usuario usuario) {
+        try {
+            String sql = "UPDATE `empresaweb`.`usuarios` SET `Bloqueado`=? WHERE  `IdUsuario`=?;";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setString(1, usuario.getBloqueado());
+            preparada.setInt(2, usuario.getIdUsuario());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+    }
+
+    @Override
+    public void actualizarUsuarioFecha(Usuario usuario) {
+        try {
+            String sql = "UPDATE `empresaweb`.`usuarios` SET `UltimoAcceso`=? WHERE  `IdUsuario`=?;";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setDate(1, usuario.getUltimoAcesso());
             preparada.setInt(2, usuario.getIdUsuario());
             preparada.executeUpdate();
         } catch (SQLException ex) {

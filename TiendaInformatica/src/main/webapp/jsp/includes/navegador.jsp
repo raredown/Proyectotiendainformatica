@@ -38,9 +38,14 @@
                     <li><a href="${pageContext.request.contextPath}/jsp/Accesos/login.jsp"><span class="glyphicon glyphicon-user"></span> Login</a></li>
                     </c:if>
                     <c:if test="${not empty sessionScope.usuario}">
-
-                    <li><a href="ConCliente"><span class="glyphicon glyphicon-user"></span> <c:out value="${sessionScope.usuario.username}"/></a></li>
-                    <li><a href="Login"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
+                        <c:if test="${sessionScope.usuario.tipo=='u'}">
+                        <li><a href="ConCliente"><span class="glyphicon glyphicon-user"></span> <c:out value="${sessionScope.usuario.username}"/></a></li>
+                        <li><a href="Login"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.usuario.tipo=='a'}">
+                        <li><a href="ControladorAdministrador"><span class="glyphicon glyphicon-user"></span> <c:out value="${sessionScope.usuario.username}"/></a></li>
+                        <li><a href="Login"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
+                        </c:if>
                     </c:if>
             </ul>
         </div>

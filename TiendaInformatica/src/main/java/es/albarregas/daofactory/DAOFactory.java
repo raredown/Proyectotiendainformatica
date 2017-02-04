@@ -4,6 +4,7 @@ import es.albarregas.dao.ICaracteristica;
 import es.albarregas.dao.ICategoria;
 import es.albarregas.dao.ICliente;
 import es.albarregas.dao.IDirrecion;
+import es.albarregas.dao.IFactura;
 import es.albarregas.dao.IGeneral;
 import es.albarregas.dao.IImagen;
 import es.albarregas.dao.IInnerJoin;
@@ -43,6 +44,8 @@ public abstract class DAOFactory {
     public abstract ILineaPedido getLineaPedido();
     
     public abstract  IInnerJoin getInnerJoin();
+    
+    public abstract IFactura getFactura();
 
     public static DAOFactory getDAOFactory(int tipo) {
         DAOFactory daof = null;

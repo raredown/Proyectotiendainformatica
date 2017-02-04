@@ -15,6 +15,8 @@ public interface IFactura {
 
     public void addFactura(Factura factura);
 
+    public Factura getoneFactura(String where);
+
     public void closeConnection();
 
 }

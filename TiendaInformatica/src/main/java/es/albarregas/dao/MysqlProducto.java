@@ -86,4 +86,39 @@ public class MysqlProducto implements IProducto {
         }
     }
 
+    @Override
+    public void actualizarProductoBloqueado(Producto producto) {
+        String sql = "UPDATE `empresaweb`.`productos` SET `FueraCatalogo`=? WHERE  `IdProducto`=?;";
+        try {
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+
+            preparada.setString(1, producto.getFueraCatalogo());
+
+            preparada.setInt(2, producto.getIdProducto());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlProvinciaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+    }
+
+    @Override
+    public void actualizarProductoStock(Producto producto) {
+        String sql = "UPDATE `empresaweb`.`productos` SET `Stock`=? WHERE  `IdProducto`=?;";
+        try {
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+
+            preparada.setInt(1, producto.getStock());
+
+            preparada.setInt(2, producto.getIdProducto());
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlProvinciaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.closeConnection();
+        }
+    }
+
+
 }

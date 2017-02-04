@@ -16,5 +16,7 @@ public interface IUsuario {
     public ArrayList<Usuario> getUsuario(String clausulaWhere);
     public void addUsuario (Usuario usuario);
     public void updateUsuario(Usuario usuario);
+    public void actualizarUsuarioBloquead(Usuario usuario);
+    public void actualizarUsuarioFecha(Usuario usuario);
     public void closeConnection();
 }

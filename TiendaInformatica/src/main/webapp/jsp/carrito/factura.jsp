@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="invoice-title">
-                    <h2>Factura</h2><h3 class="pull-right">Numero de Factura # 12345</h3>
+                    <h2>Factura</h2><h3 class="pull-right">Numero de Factura #<c:out value="${verFactura.numeroFactura}"/> </h3>
                 </div>
                 <hr>
                 <div class="row">

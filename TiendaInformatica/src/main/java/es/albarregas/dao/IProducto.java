@@ -15,6 +15,10 @@ import java.util.ArrayList;
 public interface IProducto {
     public ArrayList<Producto> getProducto(String clausulaWhere);
     public void updateProducto(Producto producto);
+    public void actualizarProductoBloqueado(Producto producto);
+    public void actualizarProductoStock(Producto producto);
     public void closeConnection();
+
+
     
 }
