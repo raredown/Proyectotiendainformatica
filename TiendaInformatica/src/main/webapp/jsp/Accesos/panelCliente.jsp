@@ -33,7 +33,14 @@
 
             </div>
             <div id="datitos">
-                <c:out value="${requestScope.mensaje}" />
+                <c:if test="${not empty requestScope.mensaje}">
+                    <div class="alert alert-success" id="success-alert2">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <strong>Correcto! </strong>
+                        <c:out value="${requestScope.mensaje}" />
+                    </div>
+
+                </c:if>
             </div>
         </div>
         <br>

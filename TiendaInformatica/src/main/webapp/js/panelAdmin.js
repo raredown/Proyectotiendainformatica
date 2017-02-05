@@ -39,7 +39,7 @@ function bloquear(id) {
     });
 }
 function updatebloquearProducto(id) {
-    alert(id);
+   // alert(id);
     selecionado = "n";
     // alert(id);
     if ($('#' + id).prop('checked')) {
@@ -49,7 +49,7 @@ function updatebloquearProducto(id) {
     {
         selecionado = "n";
     }
-    alert(id);
+   // alert(id);
     sitio = "PanelAdministrador?bloquearproducto=" + id + "&selecionado=" + selecionado;
     alert(sitio);
     $.ajax({
@@ -58,11 +58,11 @@ function updatebloquearProducto(id) {
     });
 }
 function updatestock(id, input) {
-    alert(id);
+ //   alert(id);
     inputval = $("#" + input).val();
 
     sitio = "PanelAdministrador?id=" + id + "&stock=" + inputval;
-    alert(sitio);
+    //alert(sitio);
     $.ajax({
         url: sitio,
         type: 'get'

@@ -31,7 +31,7 @@
 <div class="form-group">
     <label for="direcionNombre" class="col-lg-2 control-label">Teléfono:</label>
     <div class="col-lg-4">
-        <input type="text" class="form-control" id="telefono" placeholder="telefono" name="telefono"  required>
+        <input type="text" class="form-control" id="telefono" placeholder="telefono" name="telefono"  required pattern="[0-9]{9}">
     </div>
 </div>
 <div class="form-group">

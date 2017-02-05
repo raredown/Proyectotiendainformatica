@@ -109,7 +109,7 @@ function deleteLinea(idLinea) {
 // alert(valorCaja1);
 
     var url = "PanelCarrito?idLinea=" + idLinea + "&accion=delete";
-    alert(url);
+   
     $.ajax({
         url: url,
         type: 'get',

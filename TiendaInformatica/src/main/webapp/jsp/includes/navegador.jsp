@@ -13,18 +13,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>                        
             </button>
-            <a class="navbar-brand" href="#"><img  src="${pageContext.request.contextPath}/image/logotipo.png"></a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}"><img  src="${pageContext.request.contextPath}/image/logotipo.png"></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}">Empresa web</a></li>
-                <li><a href="#">Producto</a></li>
+                <li><a href="${pageContext.request.contextPath}">WorldPC</a></li>
+              
 
             </ul>
             <div class="col-sm-3 col-md-3">
                 <form class="navbar-form" role="search" onsubmit="return busquedaSimple();" >
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="buscador" required="required" id="buscador">
+                        <input type="text" class="form-control" placeholder="Buscador" name="buscador" required="required" id="buscador">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
