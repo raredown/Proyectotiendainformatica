@@ -1,69 +1,69 @@
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\ICaracteristica.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IInnerJoin.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlGeneral.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Prueba.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Producto.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlImagen.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Usuario.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlPedidoDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Categoria.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ConclusionCarrito.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\LineaPedido.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IImagen.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\CaracyProds.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Caracteristica.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Cliente.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\modelos\ProductoOrdenados.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IPedido.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Imagen.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IDirrecion.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlCategoriaDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlUsuarioDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorProvincia.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ConCliente.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ContraladorPueblo.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\ICliente.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\filters\UTF8Filter.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlLineaPedidoDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Provedor.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\daofactory\DAOFactory.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\modelos\Formularios.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Dirrecion.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Producto.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\NewServlet1.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\General.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Pueblo.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlInnerJoin.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorCarrito.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlCaracteristicas.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\ICategoria.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Pedido.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlProducto.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\ConnectionFactory.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IFactura.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IProducto.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Login.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\PanelCarrito.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Marca.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlPuebloDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\event\EventoInicial.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IProvincia.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Categoria.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\MostraFactura.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IUsuario.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorDireccion.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IGeneral.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorAdministrador.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Provincia.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\BuscadorSimple.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlProvinciaDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\beans\Factura.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlClienteDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\ILineaPedido.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\IPueblo.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlDirrecionDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\PanelCliente.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\CaracyProds.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\PanelAdministrador.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlFacturaDao.java
-C:\Users\rafa\Documents\Tienda proyecto\TiendaInformatica\src\main\java\es\albarregas\daofactory\MySQLDAOFactory.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlProducto.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Categoria.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlClienteDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IDirrecion.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlFacturaDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorCarrito.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorDireccion.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Cliente.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\CaracyProds.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\ICaracteristica.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlImagen.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\ICliente.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Marca.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Producto.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlDirrecionDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Prueba.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Dirrecion.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\daofactory\MySQLDAOFactory.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\PanelAdministrador.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Factura.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Login.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IInnerJoin.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\PanelCarrito.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlLineaPedidoDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ConclusionCarrito.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IPedido.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorAdministrador.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Imagen.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlPuebloDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Pueblo.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\modelos\ProductoOrdenados.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlCaracteristicas.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\BuscadorSimple.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\event\EventoInicial.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlPedidoDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Caracteristica.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlProvinciaDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Categoria.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Provedor.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Provincia.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ControladorProvincia.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\NewServlet1.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IImagen.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlInnerJoin.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Pedido.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\ConnectionFactory.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IFactura.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ContraladorPueblo.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\CaracyProds.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlUsuarioDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\ILineaPedido.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\PanelCliente.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\LineaPedido.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\ICategoria.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\modelos\Formularios.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\ConCliente.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\filters\UTF8Filter.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IPueblo.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IUsuario.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IProducto.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IProvincia.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlGeneral.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\tiendainformatica\Producto.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\MysqlCategoriaDao.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\daofactory\DAOFactory.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\General.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\dao\IGeneral.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\MostraFactura.java
+D:\Tiendainformatica\TiendaInformatica\src\main\java\es\albarregas\beans\Usuario.java

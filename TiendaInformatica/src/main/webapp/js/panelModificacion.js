@@ -64,7 +64,7 @@ function contrasena() {
             if (password.val() == pasServer) {
                 //alert("entro2");
                 //pase.setCustomValidity("Las contraseñas deben ser iguales");
-                //$('#pass').get(0).setCustomValidity('The two email addresses must match.');
+               
                 password.get(0).setCustomValidity("");
             } else {
                 password.get(0).setCustomValidity('No es la contraseña antigua.');

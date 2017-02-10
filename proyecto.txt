@@ -1,0 +1,11 @@
+-Encriptar
+-actualizar get
+-formateado decimal ajustada a la derecha
+-busqueda avanzada
+-fuera de catalogo fuera de pendiente y los de carrito
+-añadir catagoria y productos con fotos (como ficheros)
+-modificar todo producto precio por categorias ()subir precio bajar
+-administrador no puede comprar
+-cambiar username email
+-Posibilidad
+-servidor seguro
