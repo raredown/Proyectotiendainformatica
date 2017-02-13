@@ -16,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Pen Title */
+
 .pen-title {
   padding: 20px 0;
   text-align: center;
@@ -39,7 +39,7 @@ body {
   text-decoration: none;
 }
 
-/* Rerun */
+
 .rerun {
   margin: 0 0 30px;
   text-align: center;

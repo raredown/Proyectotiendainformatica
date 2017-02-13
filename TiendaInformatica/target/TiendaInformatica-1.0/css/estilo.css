@@ -110,7 +110,7 @@ footer { background-color:#4e5d6c; min-height:350px; font-family: 'Open Sans', s
 }
 .social {
     -webkit-transform: scale(0.8);
-    /* Browser Variations: */
+   
 
     -moz-transform: scale(0.8);
     -o-transform: scale(0.8);
@@ -119,9 +119,7 @@ footer { background-color:#4e5d6c; min-height:350px; font-family: 'Open Sans', s
     -o-transition-duration: 0.5s;
 }
 
-/*
-    Multicoloured Hover Variations
-*/
+
 
 #social-fb:hover {
     color: #3B5998;

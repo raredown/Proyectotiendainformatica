@@ -17,11 +17,16 @@
 
     </head>
     <body class="container-fluid">
-
+        <noscript>
+        <p>Bienvenido a Mi Sitio</p>
+        <p>La página que estás viendo requiere para su funcionamiento el uso de JavaScript. 
+            Si lo has deshabilitado intencionadamente, por favor vuelve a activarlo.</p>
+        </noscript>
         <jsp:include page="jsp/includes/navegador.jsp" />
 
+
         <div class="row">
-            <div class="col-xs-2">
+            <div class="col-xs-12 col-md-2">
                 <div class="panel panel-primary">
 
                     <div class="panel-heading"><a data-toggle="collapse" href="#collapse1">Productos</a></div>
@@ -35,8 +40,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-10" id="recarga">
-                
+            <div class="col-xs-12 col-md-10" id="recarga">
+
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <input type="hidden" value="1" id="pagina">
                     <!-- Wrapper for slides -->
@@ -90,6 +95,6 @@
         </div>
 
 
-       <jsp:include page="jsp/includes/footer.jsp" />
+        <jsp:include page="jsp/includes/footer.jsp" />
     </body>
 </html>
